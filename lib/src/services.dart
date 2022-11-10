@@ -1,3 +1,7 @@
-import 'package:emyu_telegram_bot/src/types.dart';
+import 'dart:io';
 
-part 'services/message_service.dart';
+import 'package:emyu_telegram_bot/src/types.dart';
+import 'package:http/http.dart' as http;
+
+part 'services/base_service.dart';
+part 'services/sender.dart';

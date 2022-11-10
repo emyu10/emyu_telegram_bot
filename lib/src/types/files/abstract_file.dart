@@ -1,12 +1,10 @@
-part of '../types.dart';
+part of '../../types.dart';
 
-class File {
+abstract class BaseFile {
   final String fileId;
   final String fileUniqueId;
-  int? fileSize;
-  String? filePath;
 
-  File({
+  BaseFile({
     required this.fileId,
     required this.fileUniqueId,
   });
