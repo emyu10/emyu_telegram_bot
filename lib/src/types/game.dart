@@ -40,7 +40,7 @@ class Game {
       'description': description,
       'photo': photo.map((x) => x.toMap()).toList(),
       'text': text,
-      'textEntities': textEntities?.map((x) => x?.toMap())?.toList(),
+      'text_entities': textEntities?.map((x) => x?.toMap())?.toList(),
       'animation': animation?.toMap(),
     };
   }
@@ -52,9 +52,9 @@ class Game {
       photo:
           List<PhotoSize>.from(map['photo']?.map((x) => PhotoSize.fromMap(x))),
       text: map['text'],
-      textEntities: map['textEntities'] != null
+      textEntities: map['text_entities'] != null
           ? List<MessageEntity>.from(
-              map['textEntities']?.map((x) => MessageEntity.fromMap(x)))
+              map['text_entities']?.map((x) => MessageEntity.fromMap(x)))
           : null,
       animation:
           map['animation'] != null ? Animation.fromMap(map['animation']) : null,

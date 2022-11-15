@@ -94,20 +94,55 @@ class Message {
   /// Information about the animation. For backward compatibility,
   /// when this field is set, the document field will also be set.
   Animation? animation;
+
+  /// Message is an audio file.
   Audio? audio;
+
+  /// Message is a general file, information about the file.
   Document? document;
+
+  /// Message is a photo, available sizes of the photo.
   List<PhotoSize>? photo;
+
+  /// Message is a sticker, information about the sticker.
   Sticker? sticker;
+
+  /// Message is a video, information about the video.
   Video? video;
+
+  /// Message is a video note, information about the video message.
   VideoNote? videoNote;
+
+  /// Message is a voice message, information about the file.
   Voice? voice;
+
+  /// Caption for the animation, audio, document, photo, video or voice.
   String? caption;
+
+  /// For messages with a caption, special entities.
+  ///
+  /// Like usernames, URLs, bot commands, etc. that appear in the caption.
   List<MessageEntity>? captionEntities;
+
+  /// Message is a shared contact, information about the contact.
   Contact? contact;
+
+  /// Message is a dice with random value.
   Dice? dice;
+
+  /// Message is a game, information about the game.
   Game? game;
+
+  /// Message is a native poll, information about the poll.
   Poll? poll;
+
+  /// Message is a venue, information about the venue.
+  ///
+  /// For backward compatibility, when this field is set,
+  /// the location field will also be set.
   Venue? venue;
+
+  /// Message is a shared location, information about the location.
   Location? location;
   List<User>? newChatMembers;
   User? leftChatMember;

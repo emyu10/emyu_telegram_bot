@@ -44,10 +44,10 @@ class Venue {
       'location': location.toMap(),
       'title': title,
       'address': address,
-      'foursquareId': foursquareId,
-      'foursquareType': foursquareType,
-      'googlePlaceId': googlePlaceId,
-      'googlePlaceType': googlePlaceType,
+      'foursquare_id': foursquareId,
+      'foursquare_type': foursquareType,
+      'google_place_id': googlePlaceId,
+      'google_place_type': googlePlaceType,
     };
   }
 
@@ -56,10 +56,10 @@ class Venue {
       location: Location.fromMap(map['location']),
       title: map['title'] ?? '',
       address: map['address'] ?? '',
-      foursquareId: map['foursquareId'],
-      foursquareType: map['foursquareType'],
-      googlePlaceId: map['googlePlaceId'],
-      googlePlaceType: map['googlePlaceType'],
+      foursquareId: map['foursquare_id'],
+      foursquareType: map['foursquare_type'],
+      googlePlaceId: map['google_place_id'],
+      googlePlaceType: map['google_place_type'],
     );
   }
 

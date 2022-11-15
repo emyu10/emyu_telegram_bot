@@ -45,26 +45,28 @@ class Audio extends BaseFile {
 
   Map<String, dynamic> toMap() {
     return {
+      'file_id': fileId,
+      'file_unique_id': fileUniqueId,
       'duration': duration,
       'performer': performer,
       'title': title,
-      'fileName': fileName,
-      'mimeType': mimeType,
-      'fileSize': fileSize,
+      'file_name': fileName,
+      'mime_type': mimeType,
+      'file_size': fileSize,
       'thumb': thumb?.toMap(),
     };
   }
 
   factory Audio.fromMap(Map<String, dynamic> map) {
     return Audio(
-      fileId: map['fileId'],
-      fileUniqueId: map['fileUniqueId'],
+      fileId: map['file_id'],
+      fileUniqueId: map['file_unique_id'],
       duration: map['duration']?.toInt() ?? 0,
       performer: map['performer'],
       title: map['title'],
-      fileName: map['fileName'],
-      mimeType: map['mimeType'],
-      fileSize: map['fileSize']?.toInt(),
+      fileName: map['file_name'],
+      mimeType: map['mime_type'],
+      fileSize: map['file_size']?.toInt(),
       thumb: map['thumb'] != null ? PhotoSize.fromMap(map['thumb']) : null,
     );
   }
@@ -75,7 +77,7 @@ class Audio extends BaseFile {
 
   @override
   String toString() {
-    return 'Audio(duration: $duration, performer: $performer, title: $title, fileName: $fileName, mimeType: $mimeType, fileSize: $fileSize, thumb: $thumb)';
+    return 'Audio(fileId: $fileId, fileUniqueId: $fileUniqueId, duration: $duration, performer: $performer, title: $title, fileName: $fileName, mimeType: $mimeType, fileSize: $fileSize, thumb: $thumb)';
   }
 
   @override
@@ -83,6 +85,8 @@ class Audio extends BaseFile {
     if (identical(this, other)) return true;
 
     return other is Audio &&
+        other.fileId == fileId &&
+        other.fileUniqueId == fileUniqueId &&
         other.duration == duration &&
         other.performer == performer &&
         other.title == title &&
@@ -94,7 +98,9 @@ class Audio extends BaseFile {
 
   @override
   int get hashCode {
-    return duration.hashCode ^
+    return fileId.hashCode ^
+        fileUniqueId.hashCode ^
+        duration.hashCode ^
         performer.hashCode ^
         title.hashCode ^
         fileName.hashCode ^

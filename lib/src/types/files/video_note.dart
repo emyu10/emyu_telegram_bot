@@ -33,21 +33,23 @@ class VideoNote extends BaseFile {
 
   Map<String, dynamic> toMap() {
     return {
+      'file_id': fileId,
+      'file_unique_id': fileUniqueId,
       'length': length,
       'duration': duration,
       'thumb': thumb?.toMap(),
-      'fileSize': fileSize,
+      'file_size': fileSize,
     };
   }
 
   factory VideoNote.fromMap(Map<String, dynamic> map) {
     return VideoNote(
-      fileId: map['fileId'],
-      fileUniqueId: map['fileUniqueId'],
+      fileId: map['file_id'],
+      fileUniqueId: map['file_unique_id'],
       length: map['length']?.toInt() ?? 0,
       duration: map['duration']?.toInt() ?? 0,
       thumb: map['thumb'] != null ? PhotoSize.fromMap(map['thumb']) : null,
-      fileSize: map['fileSize']?.toInt(),
+      fileSize: map['file_size']?.toInt(),
     );
   }
 
@@ -58,7 +60,7 @@ class VideoNote extends BaseFile {
 
   @override
   String toString() {
-    return 'VideoNote(length: $length, duration: $duration, thumb: $thumb, fileSize: $fileSize)';
+    return 'VideoNote(fileId: $fileId, fileUniqueId: $fileUniqueId, length: $length, duration: $duration, thumb: $thumb, fileSize: $fileSize)';
   }
 
   @override
@@ -66,6 +68,8 @@ class VideoNote extends BaseFile {
     if (identical(this, other)) return true;
 
     return other is VideoNote &&
+        other.fileId == fileId &&
+        other.fileUniqueId == fileUniqueId &&
         other.length == length &&
         other.duration == duration &&
         other.thumb == thumb &&
@@ -74,7 +78,9 @@ class VideoNote extends BaseFile {
 
   @override
   int get hashCode {
-    return length.hashCode ^
+    return fileId.hashCode ^
+        fileUniqueId.hashCode ^
+        length.hashCode ^
         duration.hashCode ^
         thumb.hashCode ^
         fileSize.hashCode;

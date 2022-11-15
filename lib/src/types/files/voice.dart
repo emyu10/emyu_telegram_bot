@@ -29,19 +29,21 @@ class Voice extends BaseFile {
 
   Map<String, dynamic> toMap() {
     return {
+      'file_id': fileId,
+      'file_unique_id': fileUniqueId,
       'duration': duration,
-      'mimeType': mimeType,
-      'fileSize': fileSize,
+      'mime_type': mimeType,
+      'file_size': fileSize,
     };
   }
 
   factory Voice.fromMap(Map<String, dynamic> map) {
     return Voice(
-      fileId: map['fileId'],
-      fileUniqueId: map['fileUniqueId'],
+      fileId: map['file_id'],
+      fileUniqueId: map['file_unique_id'],
       duration: map['duration']?.toInt() ?? 0,
-      mimeType: map['mimeType'],
-      fileSize: map['fileSize']?.toInt(),
+      mimeType: map['mime_type'],
+      fileSize: map['file_size']?.toInt(),
     );
   }
 
@@ -51,18 +53,25 @@ class Voice extends BaseFile {
 
   @override
   String toString() =>
-      'Voice(duration: $duration, mimeType: $mimeType, fileSize: $fileSize)';
+      'Voice(fileId: $fileId, fileUniqueId: $fileUniqueId, duration: $duration, mimeType: $mimeType, fileSize: $fileSize)';
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
     return other is Voice &&
+        other.fileId == fileId &&
+        other.fileUniqueId == fileUniqueId &&
         other.duration == duration &&
         other.mimeType == mimeType &&
         other.fileSize == fileSize;
   }
 
   @override
-  int get hashCode => duration.hashCode ^ mimeType.hashCode ^ fileSize.hashCode;
+  int get hashCode =>
+      fileId.hashCode ^
+      fileUniqueId.hashCode ^
+      duration.hashCode ^
+      mimeType.hashCode ^
+      fileSize.hashCode;
 }

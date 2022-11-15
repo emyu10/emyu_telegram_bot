@@ -65,41 +65,43 @@ class Sticker extends BaseFile {
 
   Map<String, dynamic> toMap() {
     return {
+      'file_id': fileId,
+      'file_unique_id': fileUniqueId,
       'type': type,
       'width': width,
       'height': height,
-      'isAnimated': isAnimated,
-      'isVideo': isVideo,
+      'is_animated': isAnimated,
+      'is_video': isVideo,
       'thumb': thumb?.toMap(),
       'emoji': emoji,
-      'setName': setName,
-      'premiumAnimation': premiumAnimation?.toMap(),
-      'maskPosition': maskPosition?.toMap(),
-      'customEmojiId': customEmojiId,
-      'fileSize': fileSize,
+      'set_name': setName,
+      'premium_animation': premiumAnimation?.toMap(),
+      'mask_position': maskPosition?.toMap(),
+      'custom_emoji_id': customEmojiId,
+      'file_size': fileSize,
     };
   }
 
   factory Sticker.fromMap(Map<String, dynamic> map) {
     return Sticker(
-      fileId: map['fileId'],
-      fileUniqueId: map['fileUniqueId'],
+      fileId: map['file_id'],
+      fileUniqueId: map['file_unique_id'],
       type: map['type'] ?? '',
       width: map['width']?.toInt() ?? 0,
       height: map['height']?.toInt() ?? 0,
-      isAnimated: map['isAnimated'] ?? false,
-      isVideo: map['isVideo'] ?? false,
+      isAnimated: map['is_animated'] ?? false,
+      isVideo: map['is_video'] ?? false,
       thumb: map['thumb'] != null ? PhotoSize.fromMap(map['thumb']) : null,
       emoji: map['emoji'],
-      setName: map['setName'],
-      premiumAnimation: map['premiumAnimation'] != null
-          ? File.fromMap(map['premiumAnimation'])
+      setName: map['set_name'],
+      premiumAnimation: map['premium_animation'] != null
+          ? File.fromMap(map['premium_animation'])
           : null,
-      maskPosition: map['maskPosition'] != null
-          ? MaskPosition.fromMap(map['maskPosition'])
+      maskPosition: map['mask_position'] != null
+          ? MaskPosition.fromMap(map['mask_position'])
           : null,
-      customEmojiId: map['customEmojiId'],
-      fileSize: map['fileSize']?.toInt(),
+      customEmojiId: map['custom_emoji_id'],
+      fileSize: map['file_size']?.toInt(),
     );
   }
 
@@ -110,7 +112,7 @@ class Sticker extends BaseFile {
 
   @override
   String toString() {
-    return 'Sticker(type: $type, width: $width, height: $height, isAnimated: $isAnimated, isVideo: $isVideo, thumb: $thumb, emoji: $emoji, setName: $setName, premiumAnimation: $premiumAnimation, maskPosition: $maskPosition, customEmojiId: $customEmojiId, fileSize: $fileSize)';
+    return 'Sticker(fileId: $fileId, fileUniqueId: $fileUniqueId, type: $type, width: $width, height: $height, isAnimated: $isAnimated, isVideo: $isVideo, thumb: $thumb, emoji: $emoji, setName: $setName, premiumAnimation: $premiumAnimation, maskPosition: $maskPosition, customEmojiId: $customEmojiId, fileSize: $fileSize)';
   }
 
   @override
@@ -118,6 +120,8 @@ class Sticker extends BaseFile {
     if (identical(this, other)) return true;
 
     return other is Sticker &&
+        other.fileId == fileId &&
+        other.fileUniqueId == fileUniqueId &&
         other.type == type &&
         other.width == width &&
         other.height == height &&
@@ -134,7 +138,9 @@ class Sticker extends BaseFile {
 
   @override
   int get hashCode {
-    return type.hashCode ^
+    return fileId.hashCode ^
+        fileUniqueId.hashCode ^
+        type.hashCode ^
         width.hashCode ^
         height.hashCode ^
         isAnimated.hashCode ^

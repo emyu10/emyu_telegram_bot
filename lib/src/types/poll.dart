@@ -69,17 +69,17 @@ class Poll {
       'id': id,
       'question': question,
       'options': options.map((x) => x.toMap()).toList(),
-      'totalVoterCount': totalVoterCount,
-      'isClosed': isClosed,
-      'isAnonymous': isAnonymous,
+      'total_voter_count': totalVoterCount,
+      'is_closed': isClosed,
+      'is_anonymous': isAnonymous,
       'type': type,
-      'allowsMultipleAnswers': allowsMultipleAnswers,
-      'correctOptionId': correctOptionId,
+      'allows_multiple_answers': allowsMultipleAnswers,
+      'correct_option_id': correctOptionId,
       'explanation': explanation,
-      'explanationEntities':
+      'explanation_entities':
           explanationEntities?.map((x) => x?.toMap())?.toList(),
-      'openPeriod': openPeriod,
-      'closeDate': closeDate,
+      'open_period': openPeriod,
+      'close_date': closeDate,
     };
   }
 
@@ -89,19 +89,19 @@ class Poll {
       question: map['question'] ?? '',
       options: List<PollOption>.from(
           map['options']?.map((x) => PollOption.fromMap(x))),
-      totalVoterCount: map['totalVoterCount']?.toInt() ?? 0,
-      isClosed: map['isClosed'] ?? false,
-      isAnonymous: map['isAnonymous'] ?? false,
+      totalVoterCount: map['total_voter_count']?.toInt() ?? 0,
+      isClosed: map['is_closed'] ?? false,
+      isAnonymous: map['is_anonymous'] ?? false,
       type: map['type'] ?? '',
-      allowsMultipleAnswers: map['allowsMultipleAnswers'] ?? false,
-      correctOptionId: map['correctOptionId']?.toInt(),
+      allowsMultipleAnswers: map['allows_multiple_answers'] ?? false,
+      correctOptionId: map['correct_option_id']?.toInt(),
       explanation: map['explanation'],
-      explanationEntities: map['explanationEntities'] != null
+      explanationEntities: map['explanation_entities'] != null
           ? List<MessageEntity>.from(
-              map['explanationEntities']?.map((x) => MessageEntity.fromMap(x)))
+              map['explanation_entities']?.map((x) => MessageEntity.fromMap(x)))
           : null,
-      openPeriod: map['openPeriod']?.toInt(),
-      closeDate: map['closeDate']?.toInt(),
+      openPeriod: map['open_period']?.toInt(),
+      closeDate: map['close_date']?.toInt(),
     );
   }
 

@@ -33,20 +33,20 @@ class Contact {
 
   Map<String, dynamic> toMap() {
     return {
-      'phoneNumber': phoneNumber,
-      'firstName': firstName,
-      'lastName': lastName,
-      'userId': userId,
+      'phone_number': phoneNumber,
+      'first_name': firstName,
+      'last_name': lastName,
+      'user_id': userId,
       'vcard': vcard,
     };
   }
 
   factory Contact.fromMap(Map<String, dynamic> map) {
     return Contact(
-      phoneNumber: map['phoneNumber'] ?? '',
-      firstName: map['firstName'] ?? '',
-      lastName: map['lastName'],
-      userId: map['userId']?.toInt(),
+      phoneNumber: map['phone_number'] ?? '',
+      firstName: map['first_name'] ?? '',
+      lastName: map['last_name'],
+      userId: map['user_id']?.toInt(),
       vcard: map['vcard'],
     );
   }

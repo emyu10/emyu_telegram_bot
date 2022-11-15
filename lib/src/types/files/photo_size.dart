@@ -31,21 +31,21 @@ class PhotoSize extends BaseFile {
 
   Map<String, dynamic> toMap() {
     return {
-      'fileId': fileId,
-      'fileUniqueId': fileUniqueId,
+      'file_id': fileId,
+      'file_unique_id': fileUniqueId,
       'width': width,
       'height': height,
-      'fileSize': fileSize,
+      'file_size': fileSize,
     };
   }
 
   factory PhotoSize.fromMap(Map<String, dynamic> map) {
     return PhotoSize(
-      fileId: map['fileId'] ?? '',
-      fileUniqueId: map['fileUniqueId'] ?? '',
+      fileId: map['file_id'] ?? '',
+      fileUniqueId: map['file_unique_id'] ?? '',
       width: map['width']?.toInt() ?? 0,
       height: map['height']?.toInt() ?? 0,
-      fileSize: map['fileSize']?.toInt(),
+      fileSize: map['file_size']?.toInt(),
     );
   }
 

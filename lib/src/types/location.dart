@@ -39,10 +39,10 @@ class Location {
     return {
       'longitude': longitude,
       'latitude': latitude,
-      'horizontalAccuracy': horizontalAccuracy,
-      'livePeriod': livePeriod,
+      'horizontal_accuracy': horizontalAccuracy,
+      'live_period': livePeriod,
       'heading': heading,
-      'proximityAlertRadius': proximityAlertRadius,
+      'proximity_alert_radius': proximityAlertRadius,
     };
   }
 
@@ -50,10 +50,10 @@ class Location {
     return Location(
       longitude: map['longitude']?.toDouble() ?? 0.0,
       latitude: map['latitude']?.toDouble() ?? 0.0,
-      horizontalAccuracy: map['horizontalAccuracy']?.toDouble(),
-      livePeriod: map['livePeriod']?.toInt(),
+      horizontalAccuracy: map['horizontal_accuracy']?.toDouble(),
+      livePeriod: map['live_period']?.toInt(),
       heading: map['heading']?.toInt(),
-      proximityAlertRadius: map['proximityAlertRadius']?.toInt(),
+      proximityAlertRadius: map['proximity_alert_radius']?.toInt(),
     );
   }
 

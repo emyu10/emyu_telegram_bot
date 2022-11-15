@@ -45,27 +45,29 @@ class Video extends BaseFile {
 
   Map<String, dynamic> toMap() {
     return {
+      'file_id': fileId,
+      'file_unique_id': fileUniqueId,
       'width': width,
       'height': height,
       'duration': duration,
       'thumb': thumb?.toMap(),
-      'fileName': fileName,
-      'mimeType': mimeType,
-      'fileSize': fileSize,
+      'file_name': fileName,
+      'mime_type': mimeType,
+      'file_size': fileSize,
     };
   }
 
   factory Video.fromMap(Map<String, dynamic> map) {
     return Video(
-      fileId: map['fileId'],
-      fileUniqueId: map['fileUniqueId'],
+      fileId: map['file_id'],
+      fileUniqueId: map['file_unique_id'],
       width: map['width']?.toInt() ?? 0,
       height: map['height']?.toInt() ?? 0,
       duration: map['duration']?.toInt() ?? 0,
       thumb: map['thumb'] != null ? PhotoSize.fromMap(map['thumb']) : null,
-      fileName: map['fileName'],
-      mimeType: map['mimeType'],
-      fileSize: map['fileSize']?.toInt(),
+      fileName: map['file_name'],
+      mimeType: map['mime_type'],
+      fileSize: map['file_size']?.toInt(),
     );
   }
 
@@ -75,7 +77,7 @@ class Video extends BaseFile {
 
   @override
   String toString() {
-    return 'Video(width: $width, height: $height, duration: $duration, thumb: $thumb, fileName: $fileName, mimeType: $mimeType, fileSize: $fileSize)';
+    return 'Video(fileId: $fileId, fileUniqueId: $fileUniqueId, width: $width, height: $height, duration: $duration, thumb: $thumb, fileName: $fileName, mimeType: $mimeType, fileSize: $fileSize)';
   }
 
   @override
@@ -83,6 +85,8 @@ class Video extends BaseFile {
     if (identical(this, other)) return true;
 
     return other is Video &&
+        other.fileId == fileId &&
+        other.fileUniqueId == fileUniqueId &&
         other.width == width &&
         other.height == height &&
         other.duration == duration &&
@@ -94,7 +98,9 @@ class Video extends BaseFile {
 
   @override
   int get hashCode {
-    return width.hashCode ^
+    return fileId.hashCode ^
+        fileUniqueId.hashCode ^
+        width.hashCode ^
         height.hashCode ^
         duration.hashCode ^
         thumb.hashCode ^
