@@ -1,26 +1,98 @@
 part of '../types.dart';
 
+/// This class represents a message of any sort, received or sent by the bot.
 class Message {
   final int messageId;
+
+  /// Unique identifier of a message thread.
+  ///
+  /// To which the message belongs; for supergroups only
+  int? messageThreadId;
+
+  /// The user from which the message originated.
   User? from;
+
+  /// Sender of the message, sent on behalf of a chat.
+  ///
+  /// For example, the channel itself for channel posts,
+  /// the supergroup itself for messages from anonymous group administrators,
+  /// the linked channel for messages automatically forwarded
+  /// to the discussion group. For backward compatibility,
+  /// the field from contains a fake sender user in non-channel chats,
+  /// if the message was sent on behalf of a chat.
   Chat? senderChat;
+
+  /// Date the message was sent in Unix time.
   final int date;
+
+  /// Conversation the message belongs to.
   final Chat chat;
+
+  /// For forwarded messages, sender of the original message.
   User? forwardFrom;
+
+  /// For messages forwarded from channels or from anonymous administrators.
   Chat? forwardFromChat;
+
+  /// For messages forwarded from channels, identifier of the original
+  /// message in the channel.
   int? forwardFromMessageId;
+
+  /// For forwarded messages that were originally sent in channels
+  /// or by an anonymous chat administrator, signature of the message sender
+  /// if present.
   String? forwardSignature;
+
+  /// Sender's name for messages forwarded from users who disallow
+  /// adding a link to their account in forwarded messages.
   String? forwardSenderName;
+
+  /// For forwarded messages, date the original message was sent in Unix time.
   int? forwardDate;
+
+  /// True, if the message is sent to a forum topic.
+  bool? isTopicMessage;
+
+  /// True, if the message is a channel post that was automatically
+  /// forwarded to the connected discussion group.
   bool? isAutomaticForward;
+
+  /// For replies, the original message.
+  ///
+  /// Note that the Message object in this field will not contain further
+  /// reply_to_message fields even if it itself is a reply.
   Message? replyToMessage;
+
+  /// Bot through which the message was sent.
   User? viaBot;
+
+  /// Date the message was last edited in Unix time.
   int? editDate;
+
+  /// True, if the message can't be forwarded.
   bool? hasProtectedContent;
+
+  /// The unique identifier of a media message group this message belongs to.
   String? mediaGroupId;
+
+  /// Signature of the post author.
+  ///
+  /// For messages in channels, or the custom title of
+  /// an anonymous group administrator.
   String? authorSignature;
+
+  /// For text messages, the actual UTF-8 text of the message.
   String? text;
+
+  /// For text messages, special entities.
+  ///
+  /// Like usernames, URLs, bot commands, etc. that appear in the text.
   List<MessageEntity>? entities;
+
+  /// Message is an animation.
+  ///
+  /// Information about the animation. For backward compatibility,
+  /// when this field is set, the document field will also be set.
   Animation? animation;
   Audio? audio;
   Document? document;
@@ -63,6 +135,7 @@ class Message {
 
   Message({
     required this.messageId,
+    this.messageThreadId,
     this.from,
     this.senderChat,
     required this.date,
@@ -73,6 +146,7 @@ class Message {
     this.forwardSignature,
     this.forwardSenderName,
     this.forwardDate,
+    this.isTopicMessage,
     this.isAutomaticForward,
     this.viaBot,
     this.editDate,
@@ -122,6 +196,7 @@ class Message {
 
   Message copyWith({
     int? messageId,
+    int? messageThreadId,
     User? from,
     Chat? senderChat,
     int? date,
@@ -132,6 +207,7 @@ class Message {
     String? forwardSignature,
     String? forwardSenderName,
     int? forwardDate,
+    bool? isTopicMessage,
     bool? isAutomaticForward,
     User? viaBot,
     int? editDate,
@@ -180,6 +256,7 @@ class Message {
   }) {
     return Message(
       messageId: messageId ?? this.messageId,
+      messageThreadId: messageThreadId ?? this.messageThreadId,
       from: from ?? this.from,
       senderChat: senderChat ?? this.senderChat,
       date: date ?? this.date,
@@ -190,6 +267,7 @@ class Message {
       forwardSignature: forwardSignature ?? this.forwardSignature,
       forwardSenderName: forwardSenderName ?? this.forwardSenderName,
       forwardDate: forwardDate ?? this.forwardDate,
+      isTopicMessage: isTopicMessage ?? this.isTopicMessage,
       isAutomaticForward: isAutomaticForward ?? this.isAutomaticForward,
       viaBot: viaBot ?? this.viaBot,
       editDate: editDate ?? this.editDate,
@@ -243,23 +321,25 @@ class Message {
 
   Map<String, dynamic> toMap() {
     return {
-      'messageId': messageId,
+      'message_id': messageId,
+      'message_thread_id': messageThreadId,
       'from': from?.toMap(),
-      'senderChat': senderChat?.toMap(),
+      'sender_chat': senderChat?.toMap(),
       'date': date,
       'chat': chat.toMap(),
-      'forwardFrom': forwardFrom?.toMap(),
-      'forwardFromChat': forwardFromChat?.toMap(),
-      'forwardFromMessageId': forwardFromMessageId,
-      'forwardSignature': forwardSignature,
-      'forwardSenderName': forwardSenderName,
-      'forwardDate': forwardDate,
-      'isAutomaticForward': isAutomaticForward,
-      'viaBot': viaBot?.toMap(),
-      'editDate': editDate,
-      'hasProtectedContent': hasProtectedContent,
-      'mediaGroupId': mediaGroupId,
-      'authorSignature': authorSignature,
+      'forward_from': forwardFrom?.toMap(),
+      'forward_from_chat': forwardFromChat?.toMap(),
+      'forward_from_message_id': forwardFromMessageId,
+      'forward_signature': forwardSignature,
+      'forward_sender_name': forwardSenderName,
+      'forward_date': forwardDate,
+      'is_topic_message': isTopicMessage,
+      'is_automatic_forward': isAutomaticForward,
+      'via_bot': viaBot?.toMap(),
+      'edit_date': editDate,
+      'has_protected_content': hasProtectedContent,
+      'media_group_id': mediaGroupId,
+      'author_signature': authorSignature,
       'text': text,
       'entities': entities?.map((x) => x?.toMap())?.toList(),
       'animation': animation?.toMap(),
@@ -268,26 +348,26 @@ class Message {
       'photo': photo?.map((x) => x?.toMap())?.toList(),
       'sticker': sticker?.toMap(),
       'video': video?.toMap(),
-      'videoNote': videoNote?.toMap(),
+      'video_note': videoNote?.toMap(),
       'voice': voice?.toMap(),
       'caption': caption,
-      'captionEntities': captionEntities?.map((x) => x?.toMap())?.toList(),
+      'caption_entities': captionEntities?.map((x) => x?.toMap())?.toList(),
       'contact': contact?.toMap(),
       'dice': dice?.toMap(),
       'game': game?.toMap(),
       'poll': poll?.toMap(),
       'venue': venue?.toMap(),
       'location': location?.toMap(),
-      'newChatMembers': newChatMembers?.map((x) => x?.toMap())?.toList(),
-      'leftChatMember': leftChatMember?.toMap(),
-      'newChatTitle': newChatTitle,
-      'newChatPhoto': newChatPhoto?.toMap(),
-      'deleteChatPhoto': deleteChatPhoto,
-      'groupChatCreated': groupChatCreated,
-      'superGroupChatCreated': superGroupChatCreated,
-      'channelChatCreated': channelChatCreated,
-      'migrateToChatId': migrateToChatId,
-      'migrateFromChatId': migrateFromChatId,
+      'new_chat_members': newChatMembers?.map((x) => x?.toMap())?.toList(),
+      'left_chat_member': leftChatMember?.toMap(),
+      'new_chat_title': newChatTitle,
+      'new_chat_photo': newChatPhoto?.toMap(),
+      'delete_chat_photo': deleteChatPhoto,
+      'group_chat_created': groupChatCreated,
+      'super_group_chat_created': superGroupChatCreated,
+      'channel_chat_created': channelChatCreated,
+      'migrate_to_chat_id': migrateToChatId,
+      'migrate_from_chat_id': migrateFromChatId,
       'invoice': invoice?.toMap(),
       'successfulPayment': successfulPayment?.toMap(),
       'connectedWebsite': connectedWebsite,
@@ -305,6 +385,7 @@ class Message {
   factory Message.fromMap(Map<String, dynamic> map) {
     return Message(
       messageId: map['messageId']?.toInt() ?? 0,
+      messageThreadId: map['message_thread_id']?.toInt(),
       from: map['from'] != null ? User.fromMap(map['from']) : null,
       senderChat:
           map['senderChat'] != null ? Chat.fromMap(map['senderChat']) : null,
@@ -319,6 +400,7 @@ class Message {
       forwardSignature: map['forwardSignature'],
       forwardSenderName: map['forwardSenderName'],
       forwardDate: map['forwardDate']?.toInt(),
+      isTopicMessage: map['is_topic_message'],
       isAutomaticForward: map['isAutomaticForward'],
       viaBot: map['viaBot'] != null ? User.fromMap(map['viaBot']) : null,
       editDate: map['editDate']?.toInt(),
@@ -411,7 +493,7 @@ class Message {
 
   @override
   String toString() {
-    return 'Message(messageId: $messageId, from: $from, senderChat: $senderChat, date: $date, chat: $chat, forwardFrom: $forwardFrom, forwardFromChat: $forwardFromChat, forwardFromMessageId: $forwardFromMessageId, forwardSignature: $forwardSignature, forwardSenderName: $forwardSenderName, forwardDate: $forwardDate, isAutomaticForward: $isAutomaticForward, viaBot: $viaBot, editDate: $editDate, hasProtectedContent: $hasProtectedContent, mediaGroupId: $mediaGroupId, authorSignature: $authorSignature, text: $text, entities: $entities, animation: $animation, audio: $audio, document: $document, photo: $photo, sticker: $sticker, video: $video, videoNote: $videoNote, voice: $voice, caption: $caption, captionEntities: $captionEntities, contact: $contact, dice: $dice, game: $game, poll: $poll, venue: $venue, location: $location, newChatMembers: $newChatMembers, leftChatMember: $leftChatMember, newChatTitle: $newChatTitle, newChatPhoto: $newChatPhoto, deleteChatPhoto: $deleteChatPhoto, groupChatCreated: $groupChatCreated, superGroupChatCreated: $superGroupChatCreated, channelChatCreated: $channelChatCreated, migrateToChatId: $migrateToChatId, migrateFromChatId: $migrateFromChatId, invoice: $invoice, successfulPayment: $successfulPayment, connectedWebsite: $connectedWebsite, passportData: $passportData, proximityAlertTriggered: $proximityAlertTriggered, videoChatScheduled: $videoChatScheduled, videoChatStarted: $videoChatStarted, videoChatEnded: $videoChatEnded, videoChatParticipantsInvited: $videoChatParticipantsInvited, webAppData: $webAppData, replyMarkup: $replyMarkup)';
+    return 'Message(messageId: $messageId, messageThreadId: $messageThreadId, from: $from, senderChat: $senderChat, date: $date, chat: $chat, forwardFrom: $forwardFrom, forwardFromChat: $forwardFromChat, forwardFromMessageId: $forwardFromMessageId, forwardSignature: $forwardSignature, forwardSenderName: $forwardSenderName, forwardDate: $forwardDate, isTopicMessage: $isTopicMessage, isAutomaticForward: $isAutomaticForward, viaBot: $viaBot, editDate: $editDate, hasProtectedContent: $hasProtectedContent, mediaGroupId: $mediaGroupId, authorSignature: $authorSignature, text: $text, entities: $entities, animation: $animation, audio: $audio, document: $document, photo: $photo, sticker: $sticker, video: $video, videoNote: $videoNote, voice: $voice, caption: $caption, captionEntities: $captionEntities, contact: $contact, dice: $dice, game: $game, poll: $poll, venue: $venue, location: $location, newChatMembers: $newChatMembers, leftChatMember: $leftChatMember, newChatTitle: $newChatTitle, newChatPhoto: $newChatPhoto, deleteChatPhoto: $deleteChatPhoto, groupChatCreated: $groupChatCreated, superGroupChatCreated: $superGroupChatCreated, channelChatCreated: $channelChatCreated, migrateToChatId: $migrateToChatId, migrateFromChatId: $migrateFromChatId, invoice: $invoice, successfulPayment: $successfulPayment, connectedWebsite: $connectedWebsite, passportData: $passportData, proximityAlertTriggered: $proximityAlertTriggered, videoChatScheduled: $videoChatScheduled, videoChatStarted: $videoChatStarted, videoChatEnded: $videoChatEnded, videoChatParticipantsInvited: $videoChatParticipantsInvited, webAppData: $webAppData, replyMarkup: $replyMarkup)';
   }
 
   @override
@@ -421,6 +503,7 @@ class Message {
 
     return other is Message &&
         other.messageId == messageId &&
+        other.messageThreadId == messageThreadId &&
         other.from == from &&
         other.senderChat == senderChat &&
         other.date == date &&
@@ -431,6 +514,7 @@ class Message {
         other.forwardSignature == forwardSignature &&
         other.forwardSenderName == forwardSenderName &&
         other.forwardDate == forwardDate &&
+        other.isTopicMessage == isTopicMessage &&
         other.isAutomaticForward == isAutomaticForward &&
         other.viaBot == viaBot &&
         other.editDate == editDate &&
@@ -481,6 +565,7 @@ class Message {
   @override
   int get hashCode {
     return messageId.hashCode ^
+        messageThreadId.hashCode ^
         from.hashCode ^
         senderChat.hashCode ^
         date.hashCode ^
@@ -491,6 +576,7 @@ class Message {
         forwardSignature.hashCode ^
         forwardSenderName.hashCode ^
         forwardDate.hashCode ^
+        isTopicMessage.hashCode ^
         isAutomaticForward.hashCode ^
         viaBot.hashCode ^
         editDate.hashCode ^

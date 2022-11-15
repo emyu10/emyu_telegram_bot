@@ -47,29 +47,29 @@ class Animation extends BaseFile {
 
   Map<String, dynamic> toMap() {
     return {
-      'fileId': fileId,
-      'fileUniqueId': fileUniqueId,
+      'file_id': fileId,
+      'file_unique_id': fileUniqueId,
       'width': width,
       'height': height,
       'duration': duration,
       'thumb': thumb?.toMap(),
-      'fileName': fileName,
-      'mimeType': mimeType,
-      'fileSize': fileSize,
+      'file_name': fileName,
+      'mime_type': mimeType,
+      'file_size': fileSize,
     };
   }
 
   factory Animation.fromMap(Map<String, dynamic> map) {
     return Animation(
-      fileId: map['fileId'] ?? '',
-      fileUniqueId: map['fileUniqueId'] ?? '',
+      fileId: map['file_id'] ?? '',
+      fileUniqueId: map['file_unique_id'] ?? '',
       width: map['width']?.toInt() ?? 0,
       height: map['height']?.toInt() ?? 0,
       duration: map['duration']?.toInt() ?? 0,
       thumb: map['thumb'] != null ? PhotoSize.fromMap(map['thumb']) : null,
-      fileName: map['fileName'],
-      mimeType: map['mimeType'],
-      fileSize: map['fileSize']?.toInt(),
+      fileName: map['file_name'],
+      mimeType: map['mime_type'],
+      fileSize: map['file_size']?.toInt(),
     );
   }
 

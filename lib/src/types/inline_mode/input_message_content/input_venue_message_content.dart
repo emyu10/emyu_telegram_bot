@@ -1,16 +1,17 @@
-part of '../types.dart';
+part of '../../../types.dart';
 
-class Venue {
-  final Location location;
+class InputVenueMessageContent extends InputMessageContent {
+  final double latitude;
+  final double longitude;
   final String title;
   final String address;
   String? foursquareId;
   String? foursquareType;
   String? googlePlaceId;
   String? googlePlaceType;
-
-  Venue({
-    required this.location,
+  InputVenueMessageContent({
+    required this.latitude,
+    required this.longitude,
     required this.title,
     required this.address,
     this.foursquareId,
@@ -19,8 +20,9 @@ class Venue {
     this.googlePlaceType,
   });
 
-  Venue copyWith({
-    Location? location,
+  InputVenueMessageContent copyWith({
+    double? latitude,
+    double? longitude,
     String? title,
     String? address,
     String? foursquareId,
@@ -28,8 +30,9 @@ class Venue {
     String? googlePlaceId,
     String? googlePlaceType,
   }) {
-    return Venue(
-      location: location ?? this.location,
+    return InputVenueMessageContent(
+      latitude: latitude ?? this.latitude,
+      longitude: longitude ?? this.longitude,
       title: title ?? this.title,
       address: address ?? this.address,
       foursquareId: foursquareId ?? this.foursquareId,
@@ -41,7 +44,8 @@ class Venue {
 
   Map<String, dynamic> toMap() {
     return {
-      'location': location.toMap(),
+      'latitude': latitude,
+      'longitude': longitude,
       'title': title,
       'address': address,
       'foursquareId': foursquareId,
@@ -51,9 +55,10 @@ class Venue {
     };
   }
 
-  factory Venue.fromMap(Map<String, dynamic> map) {
-    return Venue(
-      location: Location.fromMap(map['location']),
+  factory InputVenueMessageContent.fromMap(Map<String, dynamic> map) {
+    return InputVenueMessageContent(
+      latitude: map['latitude']?.toDouble() ?? 0.0,
+      longitude: map['longitude']?.toDouble() ?? 0.0,
       title: map['title'] ?? '',
       address: map['address'] ?? '',
       foursquareId: map['foursquareId'],
@@ -65,19 +70,21 @@ class Venue {
 
   String toJson() => json.encode(toMap());
 
-  factory Venue.fromJson(String source) => Venue.fromMap(json.decode(source));
+  factory InputVenueMessageContent.fromJson(String source) =>
+      InputVenueMessageContent.fromMap(json.decode(source));
 
   @override
   String toString() {
-    return 'Venue(location: $location, title: $title, address: $address, foursquareId: $foursquareId, foursquareType: $foursquareType, googlePlaceId: $googlePlaceId, googlePlaceType: $googlePlaceType)';
+    return 'InputVenueMessageContent(latitude: $latitude, longitude: $longitude, title: $title, address: $address, foursquareId: $foursquareId, foursquareType: $foursquareType, googlePlaceId: $googlePlaceId, googlePlaceType: $googlePlaceType)';
   }
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
-    return other is Venue &&
-        other.location == location &&
+    return other is InputVenueMessageContent &&
+        other.latitude == latitude &&
+        other.longitude == longitude &&
         other.title == title &&
         other.address == address &&
         other.foursquareId == foursquareId &&
@@ -88,7 +95,8 @@ class Venue {
 
   @override
   int get hashCode {
-    return location.hashCode ^
+    return latitude.hashCode ^
+        longitude.hashCode ^
         title.hashCode ^
         address.hashCode ^
         foursquareId.hashCode ^

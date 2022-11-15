@@ -1,3 +1,13 @@
 part of '../types.dart';
 
-class CallbackGame {}
+class CallbackGame {
+  CallbackGame();
+
+  factory CallbackGame.fromMap(Map map) {
+    return CallbackGame();
+  }
+
+  Map<String, dynamic> toMap() {
+    return Map<String, dynamic>();
+  }
+}

@@ -47,7 +47,7 @@ class MessageEntity {
       'url': url,
       'user': user?.toMap(),
       'language': language,
-      'customEmojiId': customEmojiId,
+      'custom_emoji_id': customEmojiId,
     };
   }
 
@@ -59,7 +59,7 @@ class MessageEntity {
       url: map['url'],
       user: map['user'] != null ? User.fromMap(map['user']) : null,
       language: map['language'],
-      customEmojiId: map['customEmojiId'],
+      customEmojiId: map['custom_emoji_id'],
     );
   }
 

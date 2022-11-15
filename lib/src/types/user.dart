@@ -10,7 +10,7 @@ class User {
   bool? isPremium;
   bool? addedToAttachmentMenu;
   bool? canJoinGroups;
-  bool? anReadAllGroupMessages;
+  bool? canReadAllGroupMessages;
   bool? supportsInlineQueries;
 
   User({
@@ -23,7 +23,7 @@ class User {
     this.isPremium,
     this.addedToAttachmentMenu,
     this.canJoinGroups,
-    this.anReadAllGroupMessages,
+    this.canReadAllGroupMessages,
     this.supportsInlineQueries,
   });
 
@@ -51,8 +51,8 @@ class User {
       addedToAttachmentMenu:
           addedToAttachmentMenu ?? this.addedToAttachmentMenu,
       canJoinGroups: canJoinGroups ?? this.canJoinGroups,
-      anReadAllGroupMessages:
-          anReadAllGroupMessages ?? this.anReadAllGroupMessages,
+      canReadAllGroupMessages:
+          canReadAllGroupMessages ?? canReadAllGroupMessages,
       supportsInlineQueries:
           supportsInlineQueries ?? this.supportsInlineQueries,
     );
@@ -61,32 +61,32 @@ class User {
   Map<String, dynamic> toMap() {
     return {
       'id': id,
-      'isBot': isBot,
-      'firstName': firstName,
-      'lastName': lastName,
+      'is_bot': isBot,
+      'first_name': firstName,
+      'last_name': lastName,
       'username': username,
-      'languageCode': languageCode,
-      'isPremium': isPremium,
-      'addedToAttachmentMenu': addedToAttachmentMenu,
-      'canJoinGroups': canJoinGroups,
-      'anReadAllGroupMessages': anReadAllGroupMessages,
-      'supportsInlineQueries': supportsInlineQueries,
+      'language_code': languageCode,
+      'is_premium': isPremium,
+      'added_to_attachment_menu': addedToAttachmentMenu,
+      'can_join_groups': canJoinGroups,
+      'can_read_all_group_messages': canReadAllGroupMessages,
+      'supports_inline_queries': supportsInlineQueries,
     };
   }
 
   factory User.fromMap(Map<String, dynamic> map) {
     return User(
       id: map['id']?.toInt() ?? 0,
-      isBot: map['isBot'] ?? false,
-      firstName: map['firstName'] ?? '',
-      lastName: map['lastName'],
+      isBot: map['is_bot'] ?? false,
+      firstName: map['first_name'] ?? '',
+      lastName: map['last_name'],
       username: map['username'],
-      languageCode: map['languageCode'],
-      isPremium: map['isPremium'],
-      addedToAttachmentMenu: map['addedToAttachmentMenu'],
-      canJoinGroups: map['canJoinGroups'],
-      anReadAllGroupMessages: map['anReadAllGroupMessages'],
-      supportsInlineQueries: map['supportsInlineQueries'],
+      languageCode: map['language_code'],
+      isPremium: map['is_premium'],
+      addedToAttachmentMenu: map['added_to_attachment_menu'],
+      canJoinGroups: map['can_join_groups'],
+      canReadAllGroupMessages: map['can_read_all_group_messages'],
+      supportsInlineQueries: map['supports_inline_queries'],
     );
   }
 
@@ -96,7 +96,7 @@ class User {
 
   @override
   String toString() {
-    return 'User(id: $id, isBot: $isBot, firstName: $firstName, lastName: $lastName, username: $username, languageCode: $languageCode, isPremium: $isPremium, addedToAttachmentMenu: $addedToAttachmentMenu, canJoinGroups: $canJoinGroups, anReadAllGroupMessages: $anReadAllGroupMessages, supportsInlineQueries: $supportsInlineQueries)';
+    return 'User(id: $id, isBot: $isBot, firstName: $firstName, lastName: $lastName, username: $username, languageCode: $languageCode, isPremium: $isPremium, addedToAttachmentMenu: $addedToAttachmentMenu, canJoinGroups: $canJoinGroups, canReadAllGroupMessages: $canReadAllGroupMessages, supportsInlineQueries: $supportsInlineQueries)';
   }
 
   @override
@@ -113,7 +113,7 @@ class User {
         other.isPremium == isPremium &&
         other.addedToAttachmentMenu == addedToAttachmentMenu &&
         other.canJoinGroups == canJoinGroups &&
-        other.anReadAllGroupMessages == anReadAllGroupMessages &&
+        other.canReadAllGroupMessages == canReadAllGroupMessages &&
         other.supportsInlineQueries == supportsInlineQueries;
   }
 
@@ -128,7 +128,7 @@ class User {
         isPremium.hashCode ^
         addedToAttachmentMenu.hashCode ^
         canJoinGroups.hashCode ^
-        anReadAllGroupMessages.hashCode ^
+        canReadAllGroupMessages.hashCode ^
         supportsInlineQueries.hashCode;
   }
 }
