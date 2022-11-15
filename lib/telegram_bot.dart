@@ -5,3 +5,4 @@ library telegram_bot;
 
 export 'src/types.dart';
 export 'src/services.dart';
+export 'src/exceptions.dart';

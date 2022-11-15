@@ -54,11 +54,11 @@ class EncryptedPassportElement {
     return {
       'type': type,
       'data': data,
-      'phoneNumber': phoneNumber,
+      'phone_number': phoneNumber,
       'email': email,
       'files': files?.map((x) => x?.toMap())?.toList(),
-      'frontSide': frontSide?.toMap(),
-      'reverseSide': reverseSide?.toMap(),
+      'front_side': frontSide?.toMap(),
+      'reverse_side': reverseSide?.toMap(),
       'selfie': selfie?.toMap(),
       'translation': translation?.map((x) => x?.toMap())?.toList(),
       'hash': hash,
@@ -69,17 +69,17 @@ class EncryptedPassportElement {
     return EncryptedPassportElement(
       type: map['type'] ?? '',
       data: map['data'],
-      phoneNumber: map['phoneNumber'],
+      phoneNumber: map['phone_number'],
       email: map['email'],
       files: map['files'] != null
           ? List<PassportFile>.from(
               map['files']?.map((x) => PassportFile.fromMap(x)))
           : null,
-      frontSide: map['frontSide'] != null
-          ? PassportFile.fromMap(map['frontSide'])
+      frontSide: map['front_side'] != null
+          ? PassportFile.fromMap(map['front_side'])
           : null,
-      reverseSide: map['reverseSide'] != null
-          ? PassportFile.fromMap(map['reverseSide'])
+      reverseSide: map['reverse_side'] != null
+          ? PassportFile.fromMap(map['reverse_side'])
           : null,
       selfie:
           map['selfie'] != null ? PassportFile.fromMap(map['selfie']) : null,

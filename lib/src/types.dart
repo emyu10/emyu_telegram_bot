@@ -122,3 +122,6 @@ part 'types/inline_mode/input_message_content/input_text_message_content.dart';
 part 'types/inline_mode/input_message_content/input_venue_message_content.dart';
 part 'types/labeled_price.dart';
 part 'types/update.dart';
+part 'types/inline_mode/chosen_inline_result.dart';
+part 'types/shipping_query.dart';
+part 'types/pre_checkout_query.dart';

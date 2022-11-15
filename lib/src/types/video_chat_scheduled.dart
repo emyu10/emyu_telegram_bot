@@ -17,13 +17,13 @@ class VideoChatScheduled {
 
   Map<String, dynamic> toMap() {
     return {
-      'startDate': startDate,
+      'start_date': startDate,
     };
   }
 
   factory VideoChatScheduled.fromMap(Map<String, dynamic> map) {
     return VideoChatScheduled(
-      startDate: map['startDate']?.toInt() ?? 0,
+      startDate: map['start_date']?.toInt() ?? 0,
     );
   }
 

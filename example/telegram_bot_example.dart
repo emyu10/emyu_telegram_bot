@@ -10,7 +10,47 @@ void main() {
 
 class UpdateHandler implements UpdateHandlerInterface {
   @override
-  void handle(Update u) {
+  void handleMessage(Message message) {
     print('message handled');
   }
+
+  @override
+  void handleCallbackQuery(CallbackQuery callbackQuery) => print;
+
+  @override
+  void handleChannelPost(Message channelPost) => print;
+
+  @override
+  void handleChatJoinRequest(ChatJoinRequest chatJoinRequest) => print;
+
+  @override
+  void handleChatMember(ChatMemberUpdated chatMember) => print;
+
+  @override
+  void handleChosenInlineRequest(ChosenInlineResult chosenInlineResult) =>
+      print;
+
+  @override
+  void handleEditedChannelPost(Message editedChannelPost) => print;
+
+  @override
+  void handleEditedMessage(Message message) => print;
+
+  @override
+  void handleInlineQuery(InlineQuery inlineQuery) => print;
+
+  @override
+  void handleMyChatMember(ChatMemberUpdated myChatMember) => print;
+
+  @override
+  void handlePoll(Poll poll) => print;
+
+  @override
+  void handlePollAnswer(PollAnswer pollAnswer) => print;
+
+  @override
+  void handlePreCheckoutQuery(PreCheckoutQuery preCheckoutQuery) => print;
+
+  @override
+  void handleShippingQuery(ShippingQuery shippingQuery) => print;
 }

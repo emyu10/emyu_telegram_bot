@@ -17,11 +17,12 @@ class InlineKeyboardMarkup {
 
   Map<String, dynamic> toMap() {
     return {
-      'inlineKeyboard':
+      'inline_keyboard':
           inlineKeyboard.map((x) => x.map((y) => y.toMap())).toList(),
     };
   }
 
+  /// TODO: fix this method
   factory InlineKeyboardMarkup.fromMap(Map<String, dynamic> map) {
     return InlineKeyboardMarkup(inlineKeyboard: [
       [InlineKeyboardButton(text: '')]

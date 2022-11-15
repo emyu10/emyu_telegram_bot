@@ -144,28 +144,103 @@ class Message {
 
   /// Message is a shared location, information about the location.
   Location? location;
+
+  /// New members that were added to the group or supergroup.
+  ///
+  /// And information about them (the bot itself may be one of these members).
   List<User>? newChatMembers;
+
+  /// A member was removed from the group, information about them.
+  ///
+  /// This member may be the bot itself.
   User? leftChatMember;
+
+  /// A chat title was changed to this value.
   String? newChatTitle;
+
+  /// A chat photo was change to this value.
   PhotoSize? newChatPhoto;
+
+  /// Service message: the chat photo was deleted.
   bool? deleteChatPhoto;
+
+  /// Service message: the group has been created.
   bool? groupChatCreated;
+
+  /// Service message: the supergroup has been created.
+  ///
+  /// This field can't be received in a message coming through updates,
+  /// because bot can't be a member of a supergroup when it is created.
+  /// It can only be found in reply_to_message if someone replies to
+  /// a very first message in a directly created supergroup.
   bool? superGroupChatCreated;
+
+  /// Service message: the channel has been created.
+  ///
+  /// This field can't be received in a message coming through updates,
+  /// because bot can't be a member of a channel when it is created.
+  /// It can only be found in reply_to_message if someone replies to
+  /// a very first message in a channel.
   bool? channelChatCreated;
+
+  /// Service message: auto-delete timer settings changed in the chat.
   MessageAutoDeleteTimerChanged? messageAutoDeleteTimerChanged;
+
+  /// The group has been migrated to a supergroup with the specified identifier.
+  ///
+  /// This number may have more than 32 significant bits
+  /// but it has at most 52 significant bits.
   int? migrateToChatId;
+
+  /// The supergroup has been migrated from a group with the specified identifier.
+  ///
+  /// This number may have more than 32 significant bits
+  /// but it has at most 52 significant bits.
   int? migrateFromChatId;
+
+  /// Specified message was pinned.
+  ///
+  /// Note that the Message object in this field will not contain
+  /// further reply_to_message fields even if it is itself a reply.
   Message? pinnedMessage;
+
+  /// Message is an invoice for a payment, information about the invoice.
   Invoice? invoice;
+
+  /// Message is a service message about a successful payment.
+  ///
+  /// Information about the payment.
   SuccessfulPayment? successfulPayment;
+
+  /// The domain name of the website on which the user has logged in.
   String? connectedWebsite;
+
+  /// Telegram Passport data.
   PassportData? passportData;
+
+  /// A user in the chat triggered another user's proximity alert.
+  ///
+  /// Happens while sharing Live Location. (Service message.)
   ProximityAlertTriggered? proximityAlertTriggered;
+
+  /// Service message: video chat scheduled.
   VideoChatScheduled? videoChatScheduled;
+
+  /// Service message: video chat started.
   VideoChatStarted? videoChatStarted;
+
+  /// Service message: video chat ended.
   VideoChatEnded? videoChatEnded;
+
+  /// Service message: new participants invited to a video chat.
   VideoChatParticipantsInvited? videoChatParticipantsInvited;
+
+  /// Service message: data sent by a Web App.
   WebAppData? webAppData;
+
+  /// Inline keyboard attached to the message.
+  ///
+  /// login_url buttons are represented as ordinary url buttons.
   InlineKeyboardMarkup? replyMarkup;
 
   Message({

@@ -22,14 +22,14 @@ class WebAppData {
   Map<String, dynamic> toMap() {
     return {
       'data': data,
-      'buttonText': buttonText,
+      'button_text': buttonText,
     };
   }
 
   factory WebAppData.fromMap(Map<String, dynamic> map) {
     return WebAppData(
       data: map['data'] ?? '',
-      buttonText: map['buttonText'] ?? '',
+      buttonText: map['button_text'] ?? '',
     );
   }
 
