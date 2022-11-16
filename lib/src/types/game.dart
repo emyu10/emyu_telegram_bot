@@ -40,7 +40,7 @@ class Game {
       'description': description,
       'photo': photo.map((x) => x.toMap()).toList(),
       'text': text,
-      'text_entities': textEntities?.map((x) => x?.toMap())?.toList(),
+      'text_entities': textEntities?.map((x) => x.toMap()).toList(),
       'animation': animation?.toMap(),
     };
   }

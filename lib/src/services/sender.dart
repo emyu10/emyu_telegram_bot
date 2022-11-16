@@ -11,7 +11,7 @@ class Sender extends BaseService {
   });
 
   Future<Message> sendText() async {
-    final response = await http.get(Uri.parse('${_apiUrl}sendMessage'));
+    // final response = await http.get(Uri.parse('${_apiUrl}sendMessage'));
     return Message(
       messageId: 12,
       date: 123,

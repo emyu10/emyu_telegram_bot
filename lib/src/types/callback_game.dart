@@ -8,6 +8,6 @@ class CallbackGame {
   }
 
   Map<String, dynamic> toMap() {
-    return Map<String, dynamic>();
+    return <String, dynamic>{};
   }
 }

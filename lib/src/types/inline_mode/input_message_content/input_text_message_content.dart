@@ -31,7 +31,7 @@ class InputTextMessageContent extends InputMessageContent {
     return {
       'messageText': messageText,
       'parseMode': parseMode,
-      'entities': entities?.map((x) => x?.toMap())?.toList(),
+      'entities': entities?.map((x) => x.toMap()).toList(),
       'disableWebPagePreview': disableWebPagePreview,
     };
   }

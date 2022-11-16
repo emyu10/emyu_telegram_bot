@@ -77,7 +77,7 @@ class Poll {
       'correct_option_id': correctOptionId,
       'explanation': explanation,
       'explanation_entities':
-          explanationEntities?.map((x) => x?.toMap())?.toList(),
+          explanationEntities?.map((x) => x.toMap()).toList(),
       'open_period': openPeriod,
       'close_date': closeDate,
     };

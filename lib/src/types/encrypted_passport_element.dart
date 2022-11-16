@@ -56,11 +56,11 @@ class EncryptedPassportElement {
       'data': data,
       'phone_number': phoneNumber,
       'email': email,
-      'files': files?.map((x) => x?.toMap())?.toList(),
+      'files': files?.map((x) => x.toMap()).toList(),
       'front_side': frontSide?.toMap(),
       'reverse_side': reverseSide?.toMap(),
       'selfie': selfie?.toMap(),
-      'translation': translation?.map((x) => x?.toMap())?.toList(),
+      'translation': translation?.map((x) => x.toMap()).toList(),
       'hash': hash,
     };
   }
