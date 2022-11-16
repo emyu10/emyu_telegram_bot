@@ -130,64 +130,64 @@ class Update {
 
   Map<String, dynamic> toMap() {
     return {
-      'updateId': updateId,
+      'update_id': updateId,
       'message': message?.toMap(),
-      'editedMessage': editedMessage?.toMap(),
-      'channelPost': channelPost?.toMap(),
-      'editedChannelPost': editedChannelPost?.toMap(),
-      'inlineQuery': inlineQuery?.toMap(),
-      'chosenInlineResult': chosenInlineResult?.toMap(),
-      'callbackQuery': callbackQuery?.toMap(),
-      'shippingQuery': shippingQuery?.toMap(),
-      'preCheckoutQuery': preCheckoutQuery?.toMap(),
+      'edited_message': editedMessage?.toMap(),
+      'channel_post': channelPost?.toMap(),
+      'edited_channel_post': editedChannelPost?.toMap(),
+      'inline_query': inlineQuery?.toMap(),
+      'chosen_inline_result': chosenInlineResult?.toMap(),
+      'callback_query': callbackQuery?.toMap(),
+      'shipping_query': shippingQuery?.toMap(),
+      'pre_checkout_query': preCheckoutQuery?.toMap(),
       'poll': poll?.toMap(),
-      'pollAnswer': pollAnswer?.toMap(),
-      'myChatMember': myChatMember?.toMap(),
-      'chatMember': chatMember?.toMap(),
-      'chatJoinRequest': chatJoinRequest?.toMap(),
+      'poll_answer': pollAnswer?.toMap(),
+      'my_chat_member': myChatMember?.toMap(),
+      'chat_member': chatMember?.toMap(),
+      'chat_join_request': chatJoinRequest?.toMap(),
     };
   }
 
   factory Update.fromMap(Map<String, dynamic> map) {
     return Update(
-      updateId: map['updateId']?.toInt() ?? 0,
+      updateId: map['update_id']?.toInt() ?? 0,
       message: map['message'] != null ? Message.fromMap(map['message']) : null,
-      editedMessage: map['editedMessage'] != null
-          ? Message.fromMap(map['editedMessage'])
+      editedMessage: map['edited_message'] != null
+          ? Message.fromMap(map['edited_message'])
           : null,
-      channelPost: map['channelPost'] != null
-          ? Message.fromMap(map['channelPost'])
+      channelPost: map['channel_post'] != null
+          ? Message.fromMap(map['channel_post'])
           : null,
-      editedChannelPost: map['editedChannelPost'] != null
-          ? Message.fromMap(map['editedChannelPost'])
+      editedChannelPost: map['edited_channel_post'] != null
+          ? Message.fromMap(map['edited_channel_post'])
           : null,
-      inlineQuery: map['inlineQuery'] != null
-          ? InlineQuery.fromMap(map['inlineQuery'])
+      inlineQuery: map['inline_query'] != null
+          ? InlineQuery.fromMap(map['inline_query'])
           : null,
-      chosenInlineResult: map['chosenInlineResult'] != null
-          ? ChosenInlineResult.fromMap(map['chosenInlineResult'])
+      chosenInlineResult: map['chosen_inline_result'] != null
+          ? ChosenInlineResult.fromMap(map['chosen_inline_result'])
           : null,
-      callbackQuery: map['callbackQuery'] != null
-          ? CallbackQuery.fromMap(map['callbackQuery'])
+      callbackQuery: map['callback_query'] != null
+          ? CallbackQuery.fromMap(map['callback_query'])
           : null,
-      shippingQuery: map['shippingQuery'] != null
-          ? ShippingQuery.fromMap(map['shippingQuery'])
+      shippingQuery: map['shipping_query'] != null
+          ? ShippingQuery.fromMap(map['shipping_query'])
           : null,
-      preCheckoutQuery: map['preCheckoutQuery'] != null
-          ? PreCheckoutQuery.fromMap(map['preCheckoutQuery'])
+      preCheckoutQuery: map['pre_checkout_query'] != null
+          ? PreCheckoutQuery.fromMap(map['pre_checkout_query'])
           : null,
       poll: map['poll'] != null ? Poll.fromMap(map['poll']) : null,
-      pollAnswer: map['pollAnswer'] != null
-          ? PollAnswer.fromMap(map['pollAnswer'])
+      pollAnswer: map['poll_answer'] != null
+          ? PollAnswer.fromMap(map['poll_answer'])
           : null,
-      myChatMember: map['myChatMember'] != null
-          ? ChatMemberUpdated.fromMap(map['myChatMember'])
+      myChatMember: map['my_chat_member'] != null
+          ? ChatMemberUpdated.fromMap(map['my_chat_member'])
           : null,
-      chatMember: map['chatMember'] != null
-          ? ChatMemberUpdated.fromMap(map['chatMember'])
+      chatMember: map['chat_member'] != null
+          ? ChatMemberUpdated.fromMap(map['chat_member'])
           : null,
-      chatJoinRequest: map['chatJoinRequest'] != null
-          ? ChatJoinRequest.fromMap(map['chatJoinRequest'])
+      chatJoinRequest: map['chat_join_request'] != null
+          ? ChatJoinRequest.fromMap(map['chat_join_request'])
           : null,
     );
   }

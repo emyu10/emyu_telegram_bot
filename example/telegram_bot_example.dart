@@ -5,13 +5,17 @@ void main() {
     apiToken: '1901398808:AAESqUFFb_ER02evRJQjtm4eau2sOFV3BUU',
     handler: UpdateHandler(),
   );
-  getUpdates.getNext();
+  try {
+    getUpdates.getUnread();
+  } catch (e) {
+    print(e);
+  }
 }
 
 class UpdateHandler implements UpdateHandlerInterface {
   @override
   void handleMessage(Message message) {
-    print('message handled');
+    print(message.toJson());
   }
 
   @override
