@@ -124,3 +124,6 @@ part 'types/update.dart';
 part 'types/inline_mode/chosen_inline_result.dart';
 part 'types/shipping_query.dart';
 part 'types/pre_checkout_query.dart';
+part 'types/forum_topic/forum_topic_created.dart';
+part 'types/forum_topic/forum_topic_closed.dart';
+part 'types/forum_topic/forum_topic_reopened.dart';

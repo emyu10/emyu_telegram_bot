@@ -223,6 +223,15 @@ class Message {
   /// Happens while sharing Live Location. (Service message.)
   ProximityAlertTriggered? proximityAlertTriggered;
 
+  /// Service message: forum topic created.
+  ForumTopicCreated? forumTopicCreated;
+
+  /// Service message: forum topic closed.
+  ForumTopicClosed? forumTopicClosed;
+
+  /// Service message: forum topic reopened.
+  ForumTopicReopened? forumTopicReopened;
+
   /// Service message: video chat scheduled.
   VideoChatScheduled? videoChatScheduled;
 
@@ -296,6 +305,9 @@ class Message {
     this.connectedWebsite,
     this.passportData,
     this.proximityAlertTriggered,
+    this.forumTopicCreated,
+    this.forumTopicClosed,
+    this.forumTopicReopened,
     this.videoChatScheduled,
     this.videoChatStarted,
     this.videoChatEnded,
@@ -357,6 +369,9 @@ class Message {
     String? connectedWebsite,
     PassportData? passportData,
     ProximityAlertTriggered? proximityAlertTriggered,
+    ForumTopicCreated? forumTopicCreated,
+    ForumTopicClosed? forumTopicClosed,
+    ForumTopicReopened? forumTopicReopened,
     VideoChatScheduled? videoChatScheduled,
     VideoChatStarted? videoChatStarted,
     VideoChatEnded? videoChatEnded,
@@ -419,6 +434,9 @@ class Message {
       passportData: passportData ?? this.passportData,
       proximityAlertTriggered:
           proximityAlertTriggered ?? this.proximityAlertTriggered,
+      forumTopicCreated: forumTopicCreated ?? this.forumTopicCreated,
+      forumTopicClosed: forumTopicClosed ?? this.forumTopicClosed,
+      forumTopicReopened: forumTopicReopened ?? this.forumTopicReopened,
       videoChatScheduled: videoChatScheduled ?? this.videoChatScheduled,
       videoChatStarted: videoChatStarted ?? this.videoChatStarted,
       videoChatEnded: videoChatEnded ?? this.videoChatEnded,
@@ -483,6 +501,9 @@ class Message {
       'connectedWebsite': connectedWebsite,
       'passportData': passportData?.toMap(),
       'proximityAlertTriggered': proximityAlertTriggered?.toMap(),
+      'forum_topic_created': forumTopicCreated?.toMap(),
+      'forum_topic_closed': forumTopicClosed?.toMap(),
+      'forum_topic_reopened': forumTopicReopened?.toMap(),
       'videoChatScheduled': videoChatScheduled?.toMap(),
       'videoChatStarted': videoChatStarted?.toMap(),
       'videoChatEnded': videoChatEnded?.toMap(),
@@ -574,6 +595,15 @@ class Message {
       proximityAlertTriggered: map['proximityAlertTriggered'] != null
           ? ProximityAlertTriggered.fromMap(map['proximityAlertTriggered'])
           : null,
+      forumTopicCreated: map['forum_topic_created'] != null
+          ? ForumTopicCreated.fromMap(map['forum_topic_created'])
+          : null,
+      forumTopicClosed: map['forum_topic_closed'] != null
+          ? ForumTopicClosed.fromMap(map['forum_topic_closed'])
+          : null,
+      forumTopicReopened: map['forum_topic_reopened'] != null
+          ? ForumTopicReopened.fromMap(map['forum_topic_reopened'])
+          : null,
       videoChatScheduled: map['videoChatScheduled'] != null
           ? VideoChatScheduled.fromMap(map['videoChatScheduled'])
           : null,
@@ -664,6 +694,9 @@ class Message {
         other.connectedWebsite == connectedWebsite &&
         other.passportData == passportData &&
         other.proximityAlertTriggered == proximityAlertTriggered &&
+        other.forumTopicCreated == forumTopicCreated &&
+        other.forumTopicClosed == forumTopicClosed &&
+        other.forumTopicReopened == forumTopicReopened &&
         other.videoChatScheduled == videoChatScheduled &&
         other.videoChatStarted == videoChatStarted &&
         other.videoChatEnded == videoChatEnded &&
@@ -726,6 +759,9 @@ class Message {
         connectedWebsite.hashCode ^
         passportData.hashCode ^
         proximityAlertTriggered.hashCode ^
+        forumTopicCreated.hashCode ^
+        forumTopicClosed.hashCode ^
+        forumTopicReopened.hashCode ^
         videoChatScheduled.hashCode ^
         videoChatStarted.hashCode ^
         videoChatEnded.hashCode ^
