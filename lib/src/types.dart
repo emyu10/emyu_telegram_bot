@@ -1,4 +1,4 @@
-library types;
+library emyu_telegram_bot;
 
 import 'dart:convert';
 import 'package:collection/collection.dart';

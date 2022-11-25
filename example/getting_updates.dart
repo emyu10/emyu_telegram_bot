@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:emyu_telegram_bot/telegram_bot.dart';
+import 'package:emyu_telegram_bot/emyu_telegram_bot.dart';
 
 /// dart run getting_updates.dart --define=API_TOKEN=<your api token>
 final apiToken = String.fromEnvironment(
