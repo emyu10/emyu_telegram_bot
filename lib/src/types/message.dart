@@ -497,19 +497,19 @@ class Message {
       'migrate_to_chat_id': migrateToChatId,
       'migrate_from_chat_id': migrateFromChatId,
       'invoice': invoice?.toMap(),
-      'successfulPayment': successfulPayment?.toMap(),
-      'connectedWebsite': connectedWebsite,
-      'passportData': passportData?.toMap(),
-      'proximityAlertTriggered': proximityAlertTriggered?.toMap(),
+      'successful_payment': successfulPayment?.toMap(),
+      'connected_website': connectedWebsite,
+      'passport_data': passportData?.toMap(),
+      'proximity_alert_triggered': proximityAlertTriggered?.toMap(),
       'forum_topic_created': forumTopicCreated?.toMap(),
       'forum_topic_closed': forumTopicClosed?.toMap(),
       'forum_topic_reopened': forumTopicReopened?.toMap(),
-      'videoChatScheduled': videoChatScheduled?.toMap(),
-      'videoChatStarted': videoChatStarted?.toMap(),
-      'videoChatEnded': videoChatEnded?.toMap(),
-      'videoChatParticipantsInvited': videoChatParticipantsInvited?.toMap(),
-      'webAppData': webAppData?.toMap(),
-      'replyMarkup': replyMarkup?.toMap(),
+      'video_chat_scheduled': videoChatScheduled?.toMap(),
+      'video_chat_started': videoChatStarted?.toMap(),
+      'video_chat_ended': videoChatEnded?.toMap(),
+      'video_chat_participants_invited': videoChatParticipantsInvited?.toMap(),
+      'web_app_data': webAppData?.toMap(),
+      'reply_markup': replyMarkup?.toMap(),
     };
   }
 
@@ -519,25 +519,26 @@ class Message {
       messageThreadId: map['message_thread_id']?.toInt(),
       from: map['from'] != null ? User.fromMap(map['from']) : null,
       senderChat:
-          map['senderChat'] != null ? Chat.fromMap(map['senderChat']) : null,
+          map['sender_chat'] != null ? Chat.fromMap(map['sender_chat']) : null,
       date: map['date']?.toInt() ?? 0,
       chat: Chat.fromMap(map['chat']),
-      forwardFrom:
-          map['forwardFrom'] != null ? User.fromMap(map['forwardFrom']) : null,
-      forwardFromChat: map['forwardFromChat'] != null
-          ? Chat.fromMap(map['forwardFromChat'])
+      forwardFrom: map['forward_from'] != null
+          ? User.fromMap(map['forward_from'])
           : null,
-      forwardFromMessageId: map['forwardFromMessageId']?.toInt(),
-      forwardSignature: map['forwardSignature'],
-      forwardSenderName: map['forwardSenderName'],
-      forwardDate: map['forwardDate']?.toInt(),
+      forwardFromChat: map['forward_from_chat'] != null
+          ? Chat.fromMap(map['forward_from_chat'])
+          : null,
+      forwardFromMessageId: map['forward_from_message_id']?.toInt(),
+      forwardSignature: map['forward_signature'],
+      forwardSenderName: map['forward_sender_name'],
+      forwardDate: map['forward_date']?.toInt(),
       isTopicMessage: map['is_topic_message'],
-      isAutomaticForward: map['isAutomaticForward'],
-      viaBot: map['viaBot'] != null ? User.fromMap(map['viaBot']) : null,
-      editDate: map['editDate']?.toInt(),
-      hasProtectedContent: map['hasProtectedContent'],
-      mediaGroupId: map['mediaGroupId'],
-      authorSignature: map['authorSignature'],
+      isAutomaticForward: map['is_automatic_forward'],
+      viaBot: map['via_bot'] != null ? User.fromMap(map['via_bot']) : null,
+      editDate: map['edit_date']?.toInt(),
+      hasProtectedContent: map['has_protected_content'],
+      mediaGroupId: map['media_group_id'],
+      authorSignature: map['author_signature'],
       text: map['text'],
       entities: map['entities'] != null
           ? List<MessageEntity>.from(
@@ -553,13 +554,14 @@ class Message {
           : null,
       sticker: map['sticker'] != null ? Sticker.fromMap(map['sticker']) : null,
       video: map['video'] != null ? Video.fromMap(map['video']) : null,
-      videoNote:
-          map['videoNote'] != null ? VideoNote.fromMap(map['videoNote']) : null,
+      videoNote: map['video_note'] != null
+          ? VideoNote.fromMap(map['video_note'])
+          : null,
       voice: map['voice'] != null ? Voice.fromMap(map['voice']) : null,
       caption: map['caption'],
-      captionEntities: map['captionEntities'] != null
+      captionEntities: map['caption_entities'] != null
           ? List<MessageEntity>.from(
-              map['captionEntities']?.map((x) => MessageEntity.fromMap(x)))
+              map['caption_entities']?.map((x) => MessageEntity.fromMap(x)))
           : null,
       contact: map['contact'] != null ? Contact.fromMap(map['contact']) : null,
       dice: map['dice'] != null ? Dice.fromMap(map['dice']) : null,
@@ -568,32 +570,33 @@ class Message {
       venue: map['venue'] != null ? Venue.fromMap(map['venue']) : null,
       location:
           map['location'] != null ? Location.fromMap(map['location']) : null,
-      newChatMembers: map['newChatMembers'] != null
-          ? List<User>.from(map['newChatMembers']?.map((x) => User.fromMap(x)))
+      newChatMembers: map['new_chat_members'] != null
+          ? List<User>.from(
+              map['new_chat_members']?.map((x) => User.fromMap(x)))
           : null,
-      leftChatMember: map['leftChatMember'] != null
-          ? User.fromMap(map['leftChatMember'])
+      leftChatMember: map['left_chat_member'] != null
+          ? User.fromMap(map['left_chat_member'])
           : null,
-      newChatTitle: map['newChatTitle'],
-      newChatPhoto: map['newChatPhoto'] != null
-          ? PhotoSize.fromMap(map['newChatPhoto'])
+      newChatTitle: map['new_chat_title'],
+      newChatPhoto: map['new_chat_photo'] != null
+          ? PhotoSize.fromMap(map['new_chat_photo'])
           : null,
-      deleteChatPhoto: map['deleteChatPhoto'],
-      groupChatCreated: map['groupChatCreated'],
-      superGroupChatCreated: map['superGroupChatCreated'],
-      channelChatCreated: map['channelChatCreated'],
-      migrateToChatId: map['migrateToChatId']?.toInt(),
-      migrateFromChatId: map['migrateFromChatId']?.toInt(),
+      deleteChatPhoto: map['delete_chat_photo'],
+      groupChatCreated: map['group_chat_created'],
+      superGroupChatCreated: map['super_group_chat_created'],
+      channelChatCreated: map['channel_chat_created'],
+      migrateToChatId: map['migrate_to_chat_id']?.toInt(),
+      migrateFromChatId: map['migrate_from_chat_id']?.toInt(),
       invoice: map['invoice'] != null ? Invoice.fromMap(map['invoice']) : null,
-      successfulPayment: map['successfulPayment'] != null
-          ? SuccessfulPayment.fromMap(map['successfulPayment'])
+      successfulPayment: map['successful_payment'] != null
+          ? SuccessfulPayment.fromMap(map['successful_payment'])
           : null,
-      connectedWebsite: map['connectedWebsite'],
-      passportData: map['passportData'] != null
-          ? PassportData.fromMap(map['passportData'])
+      connectedWebsite: map['connected_website'],
+      passportData: map['passport_data'] != null
+          ? PassportData.fromMap(map['passport_data'])
           : null,
-      proximityAlertTriggered: map['proximityAlertTriggered'] != null
-          ? ProximityAlertTriggered.fromMap(map['proximityAlertTriggered'])
+      proximityAlertTriggered: map['proximity_alert_triggered'] != null
+          ? ProximityAlertTriggered.fromMap(map['proximity_alert_triggered'])
           : null,
       forumTopicCreated: map['forum_topic_created'] != null
           ? ForumTopicCreated.fromMap(map['forum_topic_created'])
@@ -604,24 +607,25 @@ class Message {
       forumTopicReopened: map['forum_topic_reopened'] != null
           ? ForumTopicReopened.fromMap(map['forum_topic_reopened'])
           : null,
-      videoChatScheduled: map['videoChatScheduled'] != null
-          ? VideoChatScheduled.fromMap(map['videoChatScheduled'])
+      videoChatScheduled: map['video_chat_scheduled'] != null
+          ? VideoChatScheduled.fromMap(map['video_chat_scheduled'])
           : null,
-      videoChatStarted: map['videoChatStarted'] != null
-          ? VideoChatStarted.fromMap(map['videoChatStarted'])
+      videoChatStarted: map['video_chat_started'] != null
+          ? VideoChatStarted.fromMap(map['video_chat_started'])
           : null,
-      videoChatEnded: map['videoChatEnded'] != null
-          ? VideoChatEnded.fromMap(map['videoChatEnded'])
+      videoChatEnded: map['video_chat_ended'] != null
+          ? VideoChatEnded.fromMap(map['video_chat_ended'])
           : null,
-      videoChatParticipantsInvited: map['videoChatParticipantsInvited'] != null
-          ? VideoChatParticipantsInvited.fromMap(
-              map['videoChatParticipantsInvited'])
+      videoChatParticipantsInvited:
+          map['video_chat_participants_invited'] != null
+              ? VideoChatParticipantsInvited.fromMap(
+                  map['video_chat_participants_invited'])
+              : null,
+      webAppData: map['web_app_data'] != null
+          ? WebAppData.fromMap(map['web_app_data'])
           : null,
-      webAppData: map['webAppData'] != null
-          ? WebAppData.fromMap(map['webAppData'])
-          : null,
-      replyMarkup: map['replyMarkup'] != null
-          ? InlineKeyboardMarkup.fromMap(map['replyMarkup'])
+      replyMarkup: map['reply_markup'] != null
+          ? InlineKeyboardMarkup.fromMap(map['reply_markup'])
           : null,
     );
   }
@@ -633,7 +637,7 @@ class Message {
 
   @override
   String toString() {
-    return 'Message(messageId: $messageId, messageThreadId: $messageThreadId, from: $from, senderChat: $senderChat, date: $date, chat: $chat, forwardFrom: $forwardFrom, forwardFromChat: $forwardFromChat, forwardFromMessageId: $forwardFromMessageId, forwardSignature: $forwardSignature, forwardSenderName: $forwardSenderName, forwardDate: $forwardDate, isTopicMessage: $isTopicMessage, isAutomaticForward: $isAutomaticForward, viaBot: $viaBot, editDate: $editDate, hasProtectedContent: $hasProtectedContent, mediaGroupId: $mediaGroupId, authorSignature: $authorSignature, text: $text, entities: $entities, animation: $animation, audio: $audio, document: $document, photo: $photo, sticker: $sticker, video: $video, videoNote: $videoNote, voice: $voice, caption: $caption, captionEntities: $captionEntities, contact: $contact, dice: $dice, game: $game, poll: $poll, venue: $venue, location: $location, newChatMembers: $newChatMembers, leftChatMember: $leftChatMember, newChatTitle: $newChatTitle, newChatPhoto: $newChatPhoto, deleteChatPhoto: $deleteChatPhoto, groupChatCreated: $groupChatCreated, superGroupChatCreated: $superGroupChatCreated, channelChatCreated: $channelChatCreated, migrateToChatId: $migrateToChatId, migrateFromChatId: $migrateFromChatId, invoice: $invoice, successfulPayment: $successfulPayment, connectedWebsite: $connectedWebsite, passportData: $passportData, proximityAlertTriggered: $proximityAlertTriggered, videoChatScheduled: $videoChatScheduled, videoChatStarted: $videoChatStarted, videoChatEnded: $videoChatEnded, videoChatParticipantsInvited: $videoChatParticipantsInvited, webAppData: $webAppData, replyMarkup: $replyMarkup)';
+    return 'Message(messageId: $messageId, messageThreadId: $messageThreadId, from: $from, senderChat: $senderChat, date: $date, chat: $chat, forwardFrom: $forwardFrom, forwardFromChat: $forwardFromChat, forwardFromMessageId: $forwardFromMessageId, forwardSignature: $forwardSignature, forwardSenderName: $forwardSenderName, forwardDate: $forwardDate, isTopicMessage: $isTopicMessage, isAutomaticForward: $isAutomaticForward, viaBot: $viaBot, editDate: $editDate, hasProtectedContent: $hasProtectedContent, mediaGroupId: $mediaGroupId, authorSignature: $authorSignature, text: $text, entities: $entities, animation: $animation, audio: $audio, document: $document, photo: $photo, sticker: $sticker, video: $video, videoNote: $videoNote, voice: $voice, caption: $caption, captionEntities: $captionEntities, contact: $contact, dice: $dice, game: $game, poll: $poll, venue: $venue, location: $location, newChatMembers: $newChatMembers, leftChatMember: $leftChatMember, newChatTitle: $newChatTitle, newChatPhoto: $newChatPhoto, deleteChatPhoto: $deleteChatPhoto, groupChatCreated: $groupChatCreated, superGroupChatCreated: $superGroupChatCreated, channelChatCreated: $channelChatCreated, migrateToChatId: $migrateToChatId, migrateFromChatId: $migrateFromChatId, invoice: $invoice, successfulPayment: $successfulPayment, connectedWebsite: $connectedWebsite, passportData: $passportData, proximityAlertTriggered: $proximityAlertTriggered, forumTopicCreated: $forumTopicCreated, forumTopicClosed: $forumTopicClosed, forumTopicReopened: $forumTopicReopened, videoChatScheduled: $videoChatScheduled, videoChatStarted: $videoChatStarted, videoChatEnded: $videoChatEnded, videoChatParticipantsInvited: $videoChatParticipantsInvited, webAppData: $webAppData, replyMarkup: $replyMarkup)';
   }
 
   @override
