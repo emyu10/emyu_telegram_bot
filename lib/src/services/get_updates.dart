@@ -1,91 +1,51 @@
 part of '../services.dart';
 
 class GetUpdates extends BaseService {
-  final UpdateHandlerInterface handler;
+  bool _open = true;
+  int _offset = 0;
 
-  GetUpdates({
-    required super.apiToken,
-    required this.handler,
-  });
+  GetUpdates({required super.apiToken});
 
-  void getAll() async {
-    try {
-      final result = (await http.post(Uri.parse('${_apiUrl}getUpdates'))).body;
-      final Map m = json.decode(result);
-      for (var message in (m['result'] as List)) {
-        await _handle(message);
+  Stream<Update> getAll(
+      {bool runForever = false,
+      int? offset,
+      int? limit,
+      int? timeout,
+      List<String>? allowedUpdates}) async* {
+    if (offset != null) _offset = offset;
+    do {
+      try {
+        final Map<String, String> body = <String, String>{};
+        if (offset != null) {
+          body.addAll({'offset': _offset.toString()});
+        }
+        if (limit != null) {
+          body.addAll({'limit': limit.toString()});
+        }
+        if (timeout != null) {
+          body.addAll({'timeout': timeout.toString()});
+        }
+
+        final response =
+            (await http.post(Uri.parse('${_apiUrl}getUpdates'), body: body));
+
+        final result = response.body;
+
+        final Map updates = json.decode(result);
+        for (var update in (updates['result'] as List)) {
+          final u = Update.fromMap(update);
+          if (offset != null && _offset <= u.updateId) {
+            _offset = u.updateId + 1;
+          }
+          yield u;
+        }
+      } on Exception {
+        throw GetUpdatesException();
       }
-    } on Exception {
-      throw GetUpdatesException();
-    }
+      await Future.delayed(Duration(microseconds: 500));
+      _open = runForever;
+    } while (_open);
   }
 
-  void getUnread() async {
-    try {
-      final result = (await http.post(
-        Uri.parse('${_apiUrl}getUpdates'),
-        body: {'offset': '1'},
-      ))
-          .body;
-      final Map m = json.decode(result);
-      for (var message in (m['result'] as List)) {
-        await _handle(message);
-      }
-    } on Exception {
-      throw GetUpdatesException();
-    }
-  }
-
-  Future<void> _handle(Map<String, dynamic> update) async {
-    if (update.containsKey('message')) {
-      handler.handleMessage(Message.fromMap(update['message']));
-    }
-    if (update.containsKey('edited_message')) {
-      handler.handleEditedMessage(Message.fromMap(update['edited_message']));
-    }
-    if (update.containsKey('channel_post')) {
-      handler.handleChannelPost(Message.fromMap(update['channel_post']));
-    }
-    if (update.containsKey('edited_channel_post')) {
-      handler.handleEditedChannelPost(
-          Message.fromMap(update['edited_channel_post']));
-    }
-    if (update.containsKey('inline_query')) {
-      handler.handleInlineQuery(InlineQuery.fromMap(update['inline_query']));
-    }
-    if (update.containsKey('chosen_inline_result')) {
-      handler.handleChosenInlineRequest(
-          ChosenInlineResult.fromMap(update['chosen_inline_result']));
-    }
-    if (update.containsKey('callback_query')) {
-      handler
-          .handleCallbackQuery(CallbackQuery.fromMap(update['callback_query']));
-    }
-    if (update.containsKey('shipping_query')) {
-      handler
-          .handleShippingQuery(ShippingQuery.fromMap(update['shipping_query']));
-    }
-    if (update.containsKey('pre_checkout_query')) {
-      handler.handlePreCheckoutQuery(
-          PreCheckoutQuery.fromMap(update['pre_checkout_query']));
-    }
-    if (update.containsKey('poll')) {
-      handler.handlePoll(Poll.fromMap(update['poll']));
-    }
-    if (update.containsKey('poll_answer')) {
-      handler.handlePollAnswer(PollAnswer.fromMap(update['poll_answer']));
-    }
-    if (update.containsKey('my_chat_member')) {
-      handler.handleMyChatMember(
-          ChatMemberUpdated.fromMap(update['my_chat_member']));
-    }
-    if (update.containsKey('chat_member')) {
-      handler
-          .handleChatMember(ChatMemberUpdated.fromMap(update['chat_member']));
-    }
-    if (update.containsKey('chat_join_request')) {
-      handler.handleChatJoinRequest(
-          ChatJoinRequest.fromMap(update['chat_join_request']));
-    }
-  }
+  void close() => _open = false;
 }
