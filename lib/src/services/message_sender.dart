@@ -1,17 +1,51 @@
 part of '../services.dart';
 
-class Sender extends BaseService {
+/// Send different types of messages.
+class MessageSender extends BaseService {
+  /// The message to be sent.
   final Message message;
 
-  Sender({
+  MessageSender({
     required super.apiToken,
     required this.message,
-    super.successCallback,
-    super.failureCallback,
   });
 
-  Future<Message> sendText() async {
-    // final response = await http.get(Uri.parse('${_apiUrl}sendMessage'));
+  /// Use this method to send text messages.
+  ///
+  /// On success, the sent Message is returned.
+  Future<Message> sendMessage({
+    String? parseMode,
+    bool disableWebPagePreview = false,
+    bool disableNotification = false,
+    bool protectContent = false,
+  }) async {
+    if (message.text == null) {
+      throw MessageException(
+          message: 'The message does not have the text property.');
+    }
+
+    final body = <String, dynamic>{};
+    body.addAll({'chat_id': message.chat.id.toString()});
+    if (message.messageThreadId != null) {
+      body.addAll({'message_thread_id': message.messageThreadId.toString()});
+    }
+    body.addAll({'text': message.text!});
+    if (parseMode != null) {
+      body.addAll({'parse_mode': parseMode});
+    }
+    if (message.entities != null) {
+      body.addAll({'entities': message.entities});
+    }
+    body.addAll({'disable_web_page_preview': disableWebPagePreview});
+    body.addAll({'disable_notification': disableNotification});
+    body.addAll({'protect_content': protectContent});
+    if (message.replyToMessage != null) {
+      body.addAll({'reply_to_message_id': message.replyToMessage!.messageId});
+    }
+
+    final response =
+        await http.post(Uri.parse('${_apiUrl}sendMessage'), body: body);
+
     return Message(
       messageId: 12,
       date: 123,
@@ -24,7 +58,6 @@ class Sender extends BaseService {
 }
 
 /*
-sendMessage
 forwardMessage
 copyMessage
 sendPhoto

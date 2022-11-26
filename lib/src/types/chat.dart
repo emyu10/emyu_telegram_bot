@@ -1,28 +1,129 @@
 part of '../types.dart';
 
+/// This object represents a chat.
 class Chat {
+  /// Unique identifier for this chat.
+  ///
+  /// This number may have more than 32 significant bits.
+  /// It has at most 52 significant bits, so a signed 64-bit integer
+  /// or double-precision float type are safe for storing this identifier.
   final int id;
+
+  /// Type of chat, can be either “private”, “group”, “supergroup” or “channel”.
   final String type;
+
+  /// Title, for supergroups, channels and group chats.
   String? title;
+
+  /// Username, for private chats, supergroups and channels if available.
   String? username;
+
+  /// First name of the other party in a private chat.
   String? fistName;
+
+  /// Last name of the other party in a private chat.
   String? lastName;
+
+  /// True, if the supergroup chat is a forum (has topics enabled)
+  bool? isForum;
+
+  /// Chat photo. Returned only in getChat.
   ChatPhoto? photo;
+
+  /// If non-empty, the list of all active chat usernames.
+  ///
+  /// For private chats, supergroups and channels.
+  /// Returned only in getChat.
+  List<String>? activeUsernames;
+
+  /// Custom emoji identifier of emoji status of the other party in a private chat.
+  ///
+  /// Returned only in getChat.
+  String? emojiStatusCustomEmojiId;
+
+  /// Bio of the other party in a private chat. Returned only in getChat.
   String? bio;
+
+  /// True, if privacy settings of the other party in the private
+  /// chat allows to use tg://user?id=<user_id> links only in chats with the user.
+  ///
+  /// Returned only in getChat.
   bool? hasPrivateForwards;
+
+  /// True, if the privacy settings of the other party restrict sending
+  /// voice and video note messages in the private chat.
+  ///
+  /// Returned only in getChat.
   bool? hasRestrictedVoiceAndVideoMessages;
+
+  /// True, if users need to join the supergroup before they can send messages.
+  ///
+  /// Returned only in getChat.
   bool? joinToSendMessages;
+
+  /// True, if all users directly joining the supergroup need to be approved
+  /// by supergroup administrators. Returned only in getChat.
   bool? joinByRequest;
+
+  /// Description, for groups, supergroups and channel chats.
+  ///
+  /// Returned only in getChat.
   String? description;
+
+  /// Primary invite link, for groups, supergroups and channel chats.
+  ///
+  /// Returned only in getChat.
   String? inviteLink;
+
+  /// The most recent pinned message (by sending date).
+  ///
+  /// Returned only in getChat.
   Message? pinnedMessage;
+
+  /// Default chat member permissions, for groups and supergroups.
+  ///
+  /// Returned only in getChat.
   ChatPermissions? permissions;
+
+  /// For supergroups, the minimum allowed delay between consecutive messages
+  /// sent by each unpriviledged user; in seconds.
+  ///
+  /// Returned only in getChat.
   int? slowModeDelay;
+
+  /// The time after which all messages sent to the chat will be
+  /// automatically deleted; in seconds.
+  ///
+  /// Returned only in getChat.
   int? messageAutoDeleteTime;
+
+  /// True, if messages from the chat can't be forwarded to other chats.
+  ///
+  /// Returned only in getChat.
   bool? hasProtectedContent;
+
+  /// For supergroups, name of group sticker set.
+  ///
+  /// Returned only in getChat.
   String? stickerSetName;
+
+  /// True, if the bot can change the group sticker set.
+  ///
+  /// Returned only in getChat.
   bool? canSetStickerSet;
+
+  /// Unique identifier for the linked chat, i.e. the discussion group
+  /// identifier for a channel and vice versa; for supergroups
+  /// and channel chats.
+  ///
+  /// This number may have more than 32 significant bits.
+  /// It has at most 52 significant bits, so a signed 64-bit integer
+  /// or double-precision float type are safe for storing this identifier.
   int? linkedChatId;
+
+  /// For supergroups, the location to which the supergroup is connected.
+  ///
+  /// Returned only in getChat.
   ChatLocation? location;
 
   Chat({
@@ -32,6 +133,10 @@ class Chat {
     this.username,
     this.fistName,
     this.lastName,
+    this.isForum,
+    this.photo,
+    this.activeUsernames,
+    this.emojiStatusCustomEmojiId,
     this.bio,
     this.hasPrivateForwards,
     this.hasRestrictedVoiceAndVideoMessages,
@@ -55,6 +160,10 @@ class Chat {
     String? username,
     String? fistName,
     String? lastName,
+    bool? isForum,
+    ChatPhoto? photo,
+    List<String>? activeUsernames,
+    String? emojiStatusCustomEmojiId,
     String? bio,
     bool? hasPrivateForwards,
     bool? hasRestrictedVoiceAndVideoMessages,
@@ -77,6 +186,11 @@ class Chat {
       username: username ?? this.username,
       fistName: fistName ?? this.fistName,
       lastName: lastName ?? this.lastName,
+      isForum: isForum ?? this.isForum,
+      photo: photo ?? this.photo,
+      activeUsernames: activeUsernames ?? this.activeUsernames,
+      emojiStatusCustomEmojiId:
+          emojiStatusCustomEmojiId ?? this.emojiStatusCustomEmojiId,
       bio: bio ?? this.bio,
       hasPrivateForwards: hasPrivateForwards ?? this.hasPrivateForwards,
       hasRestrictedVoiceAndVideoMessages: hasRestrictedVoiceAndVideoMessages ??
@@ -104,6 +218,10 @@ class Chat {
       'username': username,
       'fist_name': fistName,
       'last_name': lastName,
+      'is_forum': isForum,
+      'photo': photo?.toMap(),
+      'active_usernames': activeUsernames,
+      'emoji_status_custom_emoji_id': emojiStatusCustomEmojiId,
       'bio': bio,
       'has_private_forwards': hasPrivateForwards,
       'has_restricted_voice_and_video_messages':
@@ -130,6 +248,10 @@ class Chat {
       username: map['username'],
       fistName: map['fist_name'],
       lastName: map['last_name'],
+      isForum: map['is_forum'],
+      photo: map['photo'] != null ? ChatPhoto.fromMap(map['photo']) : null,
+      activeUsernames: List<String>.from(map['active_usernames']),
+      emojiStatusCustomEmojiId: map['emoji_status_custom_emoji_id'],
       bio: map['bio'],
       hasPrivateForwards: map['has_private_forwards'],
       hasRestrictedVoiceAndVideoMessages:
@@ -156,7 +278,7 @@ class Chat {
 
   @override
   String toString() {
-    return 'Chat(id: $id, type: $type, title: $title, username: $username, fistName: $fistName, lastName: $lastName, bio: $bio, hasPrivateForwards: $hasPrivateForwards, hasRestrictedVoiceAndVideoMessages: $hasRestrictedVoiceAndVideoMessages, joinToSendMessages: $joinToSendMessages, joinByRequest: $joinByRequest, description: $description, inviteLink: $inviteLink, pinnedMessage: $pinnedMessage, slowModeDelay: $slowModeDelay, messageAutoDeleteTime: $messageAutoDeleteTime, hasProtectedContent: $hasProtectedContent, stickerSetName: $stickerSetName, canSetStickerSet: $canSetStickerSet, linkedChatId: $linkedChatId)';
+    return 'Chat(id: $id, type: $type, title: $title, username: $username, fistName: $fistName, lastName: $lastName, isForum: $isForum, photo: $photo, activeUsernames: $activeUsernames, emojiStatusCustomEmojiId: $emojiStatusCustomEmojiId, bio: $bio, hasPrivateForwards: $hasPrivateForwards, hasRestrictedVoiceAndVideoMessages: $hasRestrictedVoiceAndVideoMessages, joinToSendMessages: $joinToSendMessages, joinByRequest: $joinByRequest, description: $description, inviteLink: $inviteLink, pinnedMessage: $pinnedMessage, slowModeDelay: $slowModeDelay, messageAutoDeleteTime: $messageAutoDeleteTime, hasProtectedContent: $hasProtectedContent, stickerSetName: $stickerSetName, canSetStickerSet: $canSetStickerSet, linkedChatId: $linkedChatId)';
   }
 
   @override
@@ -170,6 +292,10 @@ class Chat {
         other.username == username &&
         other.fistName == fistName &&
         other.lastName == lastName &&
+        other.isForum == isForum &&
+        other.photo == photo &&
+        other.activeUsernames == activeUsernames &&
+        other.emojiStatusCustomEmojiId == emojiStatusCustomEmojiId &&
         other.bio == bio &&
         other.hasPrivateForwards == hasPrivateForwards &&
         other.hasRestrictedVoiceAndVideoMessages ==
@@ -195,6 +321,10 @@ class Chat {
         username.hashCode ^
         fistName.hashCode ^
         lastName.hashCode ^
+        isForum.hashCode ^
+        photo.hashCode ^
+        activeUsernames.hashCode ^
+        emojiStatusCustomEmojiId.hashCode ^
         bio.hashCode ^
         hasPrivateForwards.hashCode ^
         hasRestrictedVoiceAndVideoMessages.hashCode ^

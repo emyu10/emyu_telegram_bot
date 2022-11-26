@@ -1,10 +1,20 @@
 part of '../types.dart';
 
+/// Represents a join request sent to a chat.
 class ChatJoinRequest {
+  /// Chat to which the request was sent.
   final Chat chat;
+
+  /// User that sent the join request.
   final User from;
+
+  /// Date the request was sent in Unix time.
   final int date;
+
+  /// Bio of the user.
   String? bio;
+
+  /// Chat invite link that was used by the user to send the join request.
   ChatInviteLink? inviteLink;
 
   ChatJoinRequest({

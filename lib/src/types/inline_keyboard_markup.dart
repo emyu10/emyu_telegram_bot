@@ -1,6 +1,10 @@
 part of '../types.dart';
 
-class InlineKeyboardMarkup {
+/// An inline keyboard that appears right next to the message it belongs to.
+class InlineKeyboardMarkup extends ReplyMarkup {
+  /// Array of button rows.
+  ///
+  /// Each represented by an Array of [InlineKeyboardButton] objects
   final List<List<InlineKeyboardButton>> inlineKeyboard;
 
   InlineKeyboardMarkup({
@@ -22,12 +26,11 @@ class InlineKeyboardMarkup {
     };
   }
 
-  /// TODO: fix this method
-  factory InlineKeyboardMarkup.fromMap(Map<String, dynamic> map) {
-    return InlineKeyboardMarkup(inlineKeyboard: [
-      [InlineKeyboardButton(text: '')]
-    ]);
-  }
+  factory InlineKeyboardMarkup.fromMap(Map<String, dynamic> map) =>
+      InlineKeyboardMarkup(
+        inlineKeyboard:
+            List<List<InlineKeyboardButton>>.from(map['inline_keyboard']),
+      );
 
   String toJson() => json.encode(toMap());
 

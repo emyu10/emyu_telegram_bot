@@ -1,12 +1,31 @@
 part of '../../types.dart';
 
+/// This object represents an animation file.
+///
+/// (GIF or H.264/MPEG-4 AVC video without sound).
 class Animation extends BaseFile {
+  /// Video width as defined by sender.
   final int width;
+
+  /// Video height as defined by sender.
   final int height;
+
+  /// Duration of the video in seconds as defined by sender.
   final int duration;
+
+  /// Animation thumbnail as defined by sender.
   PhotoSize? thumb;
+
+  /// Original animation filename as defined by sender.
   String? fileName;
+
+  /// MIME type of the file as defined by sender.
   String? mimeType;
+
+  /// File size in bytes.
+  ///
+  /// It has at most 52 significant bits, so a signed 64-bit integer
+  /// or double-precision float type are safe for storing this value.
   int? fileSize;
 
   Animation({

@@ -1,12 +1,31 @@
 part of '../../types.dart';
 
+/// To be treated as music by the Telegram clients.
+///
+/// This object represents an audio file.
 class Audio extends BaseFile {
+  /// Duration of the audio in seconds as defined by sender.
   final int duration;
+
+  /// Performer of the audio as defined by sender or by audio tags.
   String? performer;
+
+  /// Title of the audio as defined by sender or by audio tags.
   String? title;
+
+  /// Original filename as defined by sender.
   String? fileName;
+
+  /// MIME type of the file as defined by sender.
   String? mimeType;
+
+  /// File size in bytes.
+  ///
+  /// It has at most 52 significant bits, so a signed 64-bit integer
+  /// or double-precision float type are safe for storing this value.
   int? fileSize;
+
+  /// Thumbnail of the album cover to which the music file belongs.
   PhotoSize? thumb;
 
   Audio({

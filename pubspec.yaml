@@ -1,6 +1,6 @@
 name: emyu_telegram_bot
 description: A dart wrapper for communicating with the telegram bot REST API.
-version: 0.0.1
+version: 0.0.2
 repository: https://github.com/emyu10/emyu_telegram_bot
 
 environment:

@@ -1,14 +1,41 @@
 part of '../types.dart';
 
+/// Represents an invite link for a chat.
 class ChatInviteLink {
+  /// The invite link.
+  ///
+  /// If the link was created by another chat administrator,
+  /// then the second part of the link will be replaced with “…”.
   final String inviteLink;
+
+  /// Creator of the link.
   final User creator;
+
+  /// True, if users joining the chat via the link need to be approved by
+  /// chat administrators.
   final bool createsJoinRequest;
+
+  /// True, if the link is primary.
   final bool isPrimary;
+
+  /// True, if the link is revoked.
   final bool isRevoked;
+
+  /// Invite link name.
   String? name;
+
+  /// Point in time when the link will expire or has been expired.
+  ///
+  /// Unix timestamp.
   int? expireDate;
+
+  /// The maximum number of users that can be members of the chat
+  /// simultaneously after joining the chat via this invite link.
+  ///
+  /// Number between 1-99999.
   int? memberLimit;
+
+  /// Number of pending join requests created using this link.
   int? pendingJoinRequest;
 
   ChatInviteLink({
