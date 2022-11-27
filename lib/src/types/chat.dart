@@ -250,7 +250,9 @@ class Chat {
       lastName: map['last_name'],
       isForum: map['is_forum'],
       photo: map['photo'] != null ? ChatPhoto.fromMap(map['photo']) : null,
-      activeUsernames: List<String>.from(map['active_usernames']),
+      activeUsernames: map['active_usernames'] != null
+          ? List<String>.from(map['active_usernames'])
+          : null,
       emojiStatusCustomEmojiId: map['emoji_status_custom_emoji_id'],
       bio: map['bio'],
       hasPrivateForwards: map['has_private_forwards'],

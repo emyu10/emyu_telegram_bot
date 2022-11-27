@@ -18,42 +18,59 @@ class MessageSender extends BaseService {
     bool disableWebPagePreview = false,
     bool disableNotification = false,
     bool protectContent = false,
+    ReplyMarkup? replyMarkup,
   }) async {
     if (message.text == null) {
-      throw MessageException(
-          message: 'The message does not have the text property.');
+      throw MessageException('The message does not have the text property.');
     }
 
-    final body = <String, dynamic>{};
-    body.addAll({'chat_id': message.chat.id.toString()});
-    if (message.messageThreadId != null) {
-      body.addAll({'message_thread_id': message.messageThreadId.toString()});
-    }
-    body.addAll({'text': message.text!});
-    if (parseMode != null) {
-      body.addAll({'parse_mode': parseMode});
-    }
-    if (message.entities != null) {
-      body.addAll({'entities': message.entities});
-    }
-    body.addAll({'disable_web_page_preview': disableWebPagePreview});
-    body.addAll({'disable_notification': disableNotification});
-    body.addAll({'protect_content': protectContent});
-    if (message.replyToMessage != null) {
-      body.addAll({'reply_to_message_id': message.replyToMessage!.messageId});
-    }
+    try {
+      final body = <String, String>{};
+      body.addAll({'chat_id': message.chat.id.toString()});
+      if (message.messageThreadId != null) {
+        body.addAll({'message_thread_id': message.messageThreadId.toString()});
+      }
+      body.addAll({'text': message.text!});
+      if (parseMode != null) {
+        body.addAll({'parse_mode': parseMode});
+      }
+      if (message.entities != null) {
+        body.addAll({'entities': message.entities.toString()});
+      }
+      body.addAll(
+          {'disable_web_page_preview': disableWebPagePreview.toString()});
+      body.addAll({'disable_notification': disableNotification.toString()});
+      body.addAll({'protect_content': protectContent.toString()});
+      if (message.replyToMessage != null) {
+        body.addAll({
+          'reply_to_message_id': message.replyToMessage!.messageId.toString()
+        });
+      }
+      if (replyMarkup != null) {
+        body.addAll({'reply_markup': replyMarkup.toString()});
+      }
 
-    final response =
-        await http.post(Uri.parse('${_apiUrl}sendMessage'), body: body);
-
-    return Message(
-      messageId: 12,
-      date: 123,
-      chat: Chat(
-        id: 123,
-        type: 'bot',
-      ),
-    );
+      final response =
+          await http.post(Uri.parse('${_apiUrl}sendMessage'), body: body);
+      final result = response.body;
+      final Map responseBody = json.decode(result);
+      if (responseBody['ok'] == false) {
+        throw MessageException(responseBody['description']);
+      }
+      // final Message msg = Message.fromJson(result);
+      // print(msg);
+      return Message(
+        messageId: 0,
+        date: 1234,
+        chat: Chat(
+          id: 0,
+          type: 'private',
+        ),
+      );
+    } catch (e) {
+      print(e);
+      rethrow;
+    }
   }
 }
 

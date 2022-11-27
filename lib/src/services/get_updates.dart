@@ -32,7 +32,8 @@ class GetUpdates extends BaseService {
         final result = response.body;
 
         final Map updates = json.decode(result);
-        for (var update in (updates['result'] as List)) {
+        // print(updates['result']);
+        for (var update in updates['result']) {
           final u = Update.fromMap(update);
           if (offset != null && _offset <= u.updateId) {
             _offset = u.updateId + 1;

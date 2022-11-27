@@ -7,9 +7,9 @@ part of '../exceptions.dart';
 class MessageException implements Exception {
   final String? message;
 
-  MessageException({this.message});
+  MessageException(this.message);
 
   @override
   String toString() =>
-      message == null ? 'Invalid message.' : 'Invalid message: $message';
+      message == null ? 'Message Exception' : 'Message Exception: $message';
 }
