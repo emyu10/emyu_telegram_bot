@@ -33,11 +33,15 @@ void main(List<String> args) async {
         text: 'this is a text _message_`code`',
         date: DateTime.now().millisecond),
   );
-  sender
-      .sendMessage(
-          parseMode: 'MarkdownV2',
-          replyMarkup: InlineKeyboardMarkup(inlineKeyboard: [
-            [InlineKeyboardButton(text: 'test button')]
-          ]))
-      .then(print);
+  // sender
+  //     .sendMessage(
+  //         parseMode: 'MarkdownV2',
+  //         replyMarkup: InlineKeyboardMarkup(inlineKeyboard: [
+  //           [InlineKeyboardButton(text: 'test button')]
+  //         ]))
+  //     .then(print);
+  InlineKeyboardMarkup m = InlineKeyboardMarkup(inlineKeyboard: [
+    [InlineKeyboardButton(text: 'test button')]
+  ]);
+  print(m.toMap().toString());
 }
