@@ -49,7 +49,7 @@ class MessageSender extends BaseService {
       if (replyMarkup != null) {
         body.addAll({'reply_markup': replyMarkup.toString()});
       }
-
+      print(json.encode(body));
       final response =
           await http.post(Uri.parse('${_apiUrl}sendMessage'), body: body);
       final result = response.body;

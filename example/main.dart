@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:emyu_telegram_bot/emyu_telegram_bot.dart';
@@ -33,15 +34,18 @@ void main(List<String> args) async {
         text: 'this is a text _message_`code`',
         date: DateTime.now().millisecond),
   );
-  // sender
-  //     .sendMessage(
-  //         parseMode: 'MarkdownV2',
-  //         replyMarkup: InlineKeyboardMarkup(inlineKeyboard: [
-  //           [InlineKeyboardButton(text: 'test button')]
-  //         ]))
-  //     .then(print);
-  InlineKeyboardMarkup m = InlineKeyboardMarkup(inlineKeyboard: [
-    [InlineKeyboardButton(text: 'test button')]
+
+  final m = InlineKeyboardMarkup(inlineKeyboard: [
+    [InlineKeyboardButton(text: 'test button')],
+    [InlineKeyboardButton(text: 'second button')]
   ]);
-  print(m.toMap().toString());
+  // print(m.toJson());
+  sender
+      .sendMessage(
+        parseMode: 'MarkdownV2',
+        replyMarkup: m,
+      )
+      .then(print);
+
+  // print(m.toJson());
 }

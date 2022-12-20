@@ -20,10 +20,15 @@ class InlineKeyboardMarkup extends ReplyMarkup {
   }
 
   Map<String, dynamic> toMap() {
-    return {
-      'inline_keyboard':
-          inlineKeyboard.map((x) => x.map((y) => y.toMap())).toList(),
-    };
+    final outer = <dynamic, dynamic>{};
+    for (var out in inlineKeyboard) {
+      final inner = {};
+      for (var inn in out) {
+        inner.addAll(inn.toMap());
+      }
+      outer.addAll(inner);
+    }
+    return {'inline_keyboard': outer};
   }
 
   factory InlineKeyboardMarkup.fromMap(Map<String, dynamic> map) =>
@@ -32,13 +37,30 @@ class InlineKeyboardMarkup extends ReplyMarkup {
             List<List<InlineKeyboardButton>>.from(map['inline_keyboard']),
       );
 
-  String toJson() => json.encode(toMap());
+  String toJson() {
+    var js = '{"inline_keyboard": [';
+    var i = 0;
+    for (var out in inlineKeyboard) {
+      js += '[';
+      for (var inn in out) {
+        js += inn.toJson();
+      }
+      js += ']';
+      if (i < (out.length)) {
+        js += ',';
+      }
+      i++;
+    }
+    js += ']}';
+    return js;
+  }
 
   factory InlineKeyboardMarkup.fromJson(String source) =>
       InlineKeyboardMarkup.fromMap(json.decode(source));
 
   @override
-  String toString() => 'InlineKeyboardMarkup(inlineKeyboard: $inlineKeyboard)';
+  String toString() =>
+      toJson(); //'InlineKeyboardMarkup(inlineKeyboard: $inlineKeyboard)';
 
   @override
   bool operator ==(Object other) {

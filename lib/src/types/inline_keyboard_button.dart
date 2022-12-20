@@ -14,14 +14,14 @@ class InlineKeyboardButton {
   InlineKeyboardButton({
     required this.text,
     this.url,
-    this.callbackData,
+    String? callbackData,
     this.webApp,
     this.loginUrl,
     this.switchInlineQuery,
     this.switchInlineQueryCurrentChat,
     this.callbackGame,
     this.pay,
-  });
+  }) : this.callbackData = callbackData ?? text;
 
   InlineKeyboardButton copyWith({
     String? text,
@@ -52,12 +52,12 @@ class InlineKeyboardButton {
     return {
       'text': text,
       'url': url,
-      'callbackData': callbackData,
-      'webApp': webApp?.toMap(),
-      'loginUrl': loginUrl?.toMap(),
-      'switchInlineQuery': switchInlineQuery,
-      'switchInlineQueryCurrentChat': switchInlineQueryCurrentChat,
-      'callbackGame': callbackGame?.toMap(),
+      'callback_data': callbackData,
+      'web_app': webApp?.toMap(),
+      'login_url': loginUrl?.toMap(),
+      'switch_inline_query': switchInlineQuery,
+      'switch_inline_query_current_chat': switchInlineQueryCurrentChat,
+      'callback_game': callbackGame?.toMap(),
       'pay': pay,
     };
   }
@@ -66,20 +66,28 @@ class InlineKeyboardButton {
     return InlineKeyboardButton(
       text: map['text'] ?? '',
       url: map['url'],
-      callbackData: map['callbackData'],
-      webApp: map['webApp'] != null ? WebAppInfo.fromMap(map['webApp']) : null,
+      callbackData: map['callback_data'],
+      webApp:
+          map['web_app'] != null ? WebAppInfo.fromMap(map['web_app']) : null,
       loginUrl:
-          map['loginUrl'] != null ? LoginUrl.fromMap(map['loginUrl']) : null,
-      switchInlineQuery: map['switchInlineQuery'],
-      switchInlineQueryCurrentChat: map['switchInlineQueryCurrentChat'],
-      callbackGame: map['callbackGame'] != null
-          ? CallbackGame.fromMap(map['callbackGame'])
+          map['login_url'] != null ? LoginUrl.fromMap(map['login_url']) : null,
+      switchInlineQuery: map['switch_inline_query'],
+      switchInlineQueryCurrentChat: map['switch_inline_query_current_chat'],
+      callbackGame: map['callback_game'] != null
+          ? CallbackGame.fromMap(map['callback_game'])
           : null,
       pay: map['pay'],
     );
   }
 
-  String toJson() => json.encode(toMap());
+  String toJson() {
+    final m = toMap();
+    if (url == null) {
+      m.remove('url');
+    }
+
+    return json.encode(m);
+  }
 
   factory InlineKeyboardButton.fromJson(String source) =>
       InlineKeyboardButton.fromMap(json.decode(source));
